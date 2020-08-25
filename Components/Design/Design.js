@@ -47,6 +47,27 @@ const useStyles = makeStyles((theme) => ({
       justifyContent: "center",
     },
   },
+  offlinePaper: {
+    padding: theme.spacing(2),
+    position: "relative",
+    textAlign: "center",
+    width: "70%",
+    fontFamily: "Segoe UI ",
+    fontSize: "20px",
+    color: "#7e7e7e",
+    backgroundColor: "#dae3f0",
+    borderRadius: "8px",
+    //boxShadow: "5px 6px 13px  grey",
+    cursor: "pointer",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    [theme.breakpoints.down("xs")]: {
+      fontSize: "24px",
+      width: "85%",
+      height: "20px",
+    },
+  },
   typo: {
     display: "none",
     color: "#7e7e7e",
@@ -63,6 +84,19 @@ const useStyles = makeStyles((theme) => ({
       padding: "0",
     },
   },
+  dot: {
+    height: "10px",
+    width: "10px",
+    backgroundColor: "#ff0000",
+    borderRadius: "50%",
+    display: "inline-block",
+    marginRight: "10px",
+    [theme.breakpoints.down("xs")]: {
+      position: "absolute",
+      top: "23px",
+      left: "110px",
+    },
+  }
 }));
 
 export default function FullWidthGrid({ baseURL }) {
@@ -94,7 +128,12 @@ export default function FullWidthGrid({ baseURL }) {
             <h1 className={classes.typo}>Home</h1>
           </Grid>
           <Grid className={classes.offline} item xs={12}>
-            <Paper className={classes.paper}>Offline</Paper>
+            {baseURL === "http://192.168.50.5:3000"
+              ? <Paper className={classes.offlinePaper}><div className={classes.dot} />Offline</Paper>
+              : <Paper className={classes.offlinePaper}><div className={classes.dot} style={{ backgroundColor: "#32CD32" }} />Online</Paper>
+            }
+
+
           </Grid>
         </Grid>
       </Grid>

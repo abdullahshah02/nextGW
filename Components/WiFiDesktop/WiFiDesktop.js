@@ -13,6 +13,7 @@ const useStyles = makeStyles((theme) => ({
   box: {
     border: "1px ",
     boxShadow: "1px 1px 4px grey",
+    overflowY: "auto",
     backgroundColor: "#f2f2f2",
     borderRadius: "1rem",
     height: "23rem",

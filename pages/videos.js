@@ -43,6 +43,7 @@ const useStyles = makeStyles((theme) => ({
     color: "#7e7e7e",
     backgroundColor: "#fff",
     borderRadius: "8px",
+    overflowY: "auto",
     //boxShadow: "5px 6px 13px  grey",
     cursor: "pointer",
     display: "flex",
@@ -136,7 +137,7 @@ const Videos = ({ baseURL }) => {
   const handleClose = (event) => {
     if (moment(event.target.id, "YYYY-MM-DD", true).isValid()) {
       setCurrDate(event.target.id);
-      setCurrVideos(data[event.target.id]);
+      setCurrVideos(data[event.target.id].reverse());
     }
     setAnchorEl(null);
   };
@@ -149,7 +150,7 @@ const Videos = ({ baseURL }) => {
         setDates(response.data.date_list);
         setData(response.data.videos);
         setCurrDate(response.data.date_list[0]);
-        setCurrVideos(response.data.videos[response.data.date_list[0]]);
+        setCurrVideos(response.data.videos[response.data.date_list[0]].reverse());
       }
       catch (error) {
         console.log(error);
