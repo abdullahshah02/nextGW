@@ -49,7 +49,6 @@ const useStyles = makeStyles((theme) => ({
   },
   offlinePaper: {
     padding: theme.spacing(2),
-    position: "relative",
     textAlign: "center",
     width: "70%",
     fontFamily: "Segoe UI ",
@@ -91,11 +90,6 @@ const useStyles = makeStyles((theme) => ({
     borderRadius: "50%",
     display: "inline-block",
     marginRight: "10px",
-    [theme.breakpoints.down("xs")]: {
-      position: "absolute",
-      top: "23px",
-      left: "110px",
-    },
   }
 }));
 
