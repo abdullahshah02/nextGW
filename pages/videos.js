@@ -89,14 +89,14 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: "center",
     marginTop: "17px",
     [theme.breakpoints.down("sm")]: {
-      display: "none",
+      marginTop: "80px",
       padding: "10px",
       height: "300px"
     },
     [theme.breakpoints.down("xs")]: {
-      display: "none",
+      marginTop: "80px",
       padding: "10px",
-      height: "100%"
+      height: "250px"
     },
   },
   dateButton: {
@@ -119,11 +119,40 @@ const useStyles = makeStyles((theme) => ({
     [theme.breakpoints.down("sm")]: {
       display: "block"
     }
+  },
+  modal: {
+    position: "absolute",
+    zIndex: "1",
+    padding: "20px",
+    paddingTop: "100px",
+    left: "0",
+    top: "0",
+    width: "90%",
+    height: "100%",
+    overflow: "auto",
+    backgroundColor: "rgba(0, 0, 0, 0.2)"
+  },
+  close: {
+    color: "#000",
+    fontSize: "60px",
+    fontWeight: "bold",
+    cursor: "pointer",
+    position: "absolute",
+    top: "0px",
+    right: "0px",
+    zIndex: "2"
+  },
+  modalContent: {
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    position: "relative",
   }
 }));
 
 const Videos = ({ baseURL }) => {
   const classes = useStyles();
+  const [modal, setModal] = React.useState(false);
   const [url, setUrl] = React.useState(null);
   const [data, setData] = React.useState(null);
   const [dates, setDates] = React.useState(null);
@@ -160,15 +189,6 @@ const Videos = ({ baseURL }) => {
 
     getVideos();
   }, []);
-
-  function toggleDisplay(id) {
-    const x = document.getElementById(id);
-    if (x.style.display === "none") {
-      x.style.display = "block";
-    } else {
-      x.style.display = "none";
-    }
-  };
 
   return (
     <>
@@ -235,62 +255,76 @@ const Videos = ({ baseURL }) => {
       </div>
 
       <div className={classes.mobile}>
-        <Grid className={classes.main} item xs={12} sm={12}>
-          <div style={{ display: 'flex', alignItems: "center" }}>
-            <img src="/back.png" style={{ width: "30px", height: "30px", marginRight: "20px", cursor: "pointer"}} onClick={() => Router.push('/')}/>
-            <h1 style={{ color: '#7e7e7e', fontFamily: 'Segoe UI', marginTop: "20px", marginBottom: '20px' }}>Videos</h1>
-          </div>
-          <div className={classes.column}>
-            <Paper className={classes.paper}>
-              <List component="nav" className={classes.root}>
 
-                <ListItem divider>
-                  <Button className={classes.dateButton} aria-controls="simple-menu" aria-haspopup="true" onClick={handleClick}>
-                    {currDate ? currDate : null}
-                  </Button>
-                  <Menu
-                    anchorEl={anchorEl}
-                    keepMounted
-                    open={Boolean(anchorEl)}
-                    onClose={handleClose}
-                  >
-                    {dates
-                      ? dates.map((date, key) => {
-                        return <MenuItem key={key} onClick={handleClose} id={date}>{date}</MenuItem>
-                      })
-                      : null
-                    }
-                  </Menu>
-                </ListItem>
-
-                {currVideos
-                  ? currVideos.map((video, key) => (
-                    <ListItem
-                      key={key}
-                      button
-                      divider
-                      onClick={() => toggleDisplay(`video${key + 1}`)}
-                      style={{ display: "flex", flexDirection: "column", justifyContent: "left" }}
-                    >
-                      <ListItemText className={classes.item}>{video.time}</ListItemText>
-                      <div className={classes.video} id={`video${key + 1}`}>
-                        <ReactPlayer
-                          style={{ borderRadius: "10px", overflow: "hidden" }}
-                          url={video.url}
-                          width='100%'
-                          height='100%'
-                          controls
-                        />
-                      </div>
-                    </ListItem>
-                  ))
-                  : null
-                }
-              </List>
-            </Paper>
+        {modal
+          ? <div class={classes.modal}>
+            <div class={classes.modalContent}>
+              
+            <div class={classes.close} onClick={() => setModal(false)}>&times;</div>
+              <div className={classes.video} style={{display: "block"}}>
+                <ReactPlayer
+                  style={{ borderRadius: "10px", overflow: "hidden" }}
+                  url={url}
+                  width='100%'
+                  height='100%'
+                  controls
+                />
+              </div>
+            </div>
           </div>
-        </Grid>
+          : null
+        }
+
       </div>
+      <Grid className={classes.main} item xs={12} sm={12}>
+        <div style={{ display: 'flex', alignItems: "center" }}>
+          <img src="/back.png" style={{ width: "30px", height: "30px", marginRight: "20px", cursor: "pointer" }} onClick={() => Router.push('/')} />
+          <h1 style={{ color: '#7e7e7e', fontFamily: 'Segoe UI', marginTop: "20px", marginBottom: '20px' }}>Videos</h1>
+        </div>
+        <div className={classes.column}>
+          <Paper className={classes.paper}>
+            <List component="nav" className={classes.root}>
+
+              <ListItem divider>
+                <Button className={classes.dateButton} aria-controls="simple-menu" aria-haspopup="true" onClick={handleClick}>
+                  {currDate ? currDate : null}
+                </Button>
+                <Menu
+                  anchorEl={anchorEl}
+                  keepMounted
+                  open={Boolean(anchorEl)}
+                  onClose={handleClose}
+                >
+                  {dates
+                    ? dates.map((date, key) => {
+                      return <MenuItem key={key} onClick={handleClose} id={date}>{date}</MenuItem>
+                    })
+                    : null
+                  }
+                </Menu>
+              </ListItem>
+
+              {currVideos
+                ? currVideos.map((video, key) => (
+                  <ListItem
+                    key={key}
+                    button
+                    divider
+                    onClick={() => {
+                      setModal(true)
+                      setUrl(video.url)
+                    }}
+                    style={{ display: "flex", flexDirection: "column", justifyContent: "left" }}
+                  >
+                    <ListItemText className={classes.item}>{video.time}</ListItemText>
+                  </ListItem>
+                ))
+                : null
+              }
+            </List>
+          </Paper>
+        </div>
+    </Grid>
     </>
   );
 };
