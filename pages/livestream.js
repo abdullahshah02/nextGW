@@ -3,6 +3,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
 import Navbar from "../Components/Navigation/Navbar";
 import Container from "@material-ui/core/Container";
+import Router from "next/router";
 
 const useStyles = makeStyles((theme) => ({
   grid: {
@@ -100,6 +101,12 @@ const useStyles = makeStyles((theme) => ({
     margin: '0', 
     width: '100%', 
     textAlign: 'left',
+  },
+  backButton: {
+    display: "none",
+    [theme.breakpoints.down("xs")]: {
+      display: "block"
+    },
   }
 }));
 
@@ -119,7 +126,10 @@ export default function Livestream({ baseURL }) {
             <Navbar />
         </Grid>
         <Grid className={classes.main} item xs={12} sm={9} md={10}>
-          <h1 className={classes.heading}>Live</h1>
+        <div style={{ display: 'flex', alignItems: "center", width: "95%" }}>
+            <img className={classes.backButton} src="/back.png" style={{ width: "30px", height: "30px", marginRight: "20px", cursor: "pointer" }} onClick={() => Router.push('/')} />
+            <h1 style={{ color: '#7e7e7e', fontFamily: 'Segoe UI', marginTop: "20px", marginBottom: '20px', textAlign: "left"}}>Live</h1>
+          </div>
           <div className={classes.video}>
             <img src={`${baseURL}5/run/pikrellcam/mjpeg.jpg?${time}`} style={{ width: "100%", height: "100%" }} />
           </div>

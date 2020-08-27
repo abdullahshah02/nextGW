@@ -14,6 +14,7 @@ import ReactPlayer from 'react-player';
 import axios from 'axios';
 import _ from 'underscore';
 import moment from 'moment';
+import Router from "next/router";
 
 
 const useStyles = makeStyles((theme) => ({
@@ -178,6 +179,7 @@ const Videos = ({ baseURL }) => {
               <Navbar />
             </Grid>
             <Grid className={classes.main} item xs={12} sm={3} md={2}>
+
               <h1 style={{ color: '#7e7e7e', fontWeight: 'bold', fontFamily: 'Segoe UI', margin: '0' }}>Videos</h1>
               <div className={classes.column}>
                 <Paper className={classes.paper}>
@@ -234,7 +236,10 @@ const Videos = ({ baseURL }) => {
 
       <div className={classes.mobile}>
         <Grid className={classes.main} item xs={12} sm={12}>
-          <h1 style={{ color: '#7e7e7e', fontFamily: 'Segoe UI', marginTop: "20px", marginBottom: '20px' }}>Videos</h1>
+          <div style={{ display: 'flex', alignItems: "center" }}>
+            <img src="/back.png" style={{ width: "30px", height: "30px", marginRight: "20px", cursor: "pointer"}} onClick={() => Router.push('/')}/>
+            <h1 style={{ color: '#7e7e7e', fontFamily: 'Segoe UI', marginTop: "20px", marginBottom: '20px' }}>Videos</h1>
+          </div>
           <div className={classes.column}>
             <Paper className={classes.paper}>
               <List component="nav" className={classes.root}>

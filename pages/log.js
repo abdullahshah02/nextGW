@@ -9,6 +9,7 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import Button from '@material-ui/core/Button';
 import { Paper } from '@material-ui/core';
+import Router from "next/router";
 
 const useStyles = makeStyles((theme) => ({
   grid: {
@@ -100,6 +101,12 @@ const useStyles = makeStyles((theme) => ({
       marginBottom: "-30px",
       zIndex: "5"
     },
+  },
+  backButton: {
+    display: "none",
+    [theme.breakpoints.down("xs")]: {
+      display: "block"
+    },
   }
 }));
 
@@ -130,7 +137,10 @@ export default function Log({ baseURL }) {
           <Navbar />
         </Grid>
         <Grid className={classes.main} item xs={12} sm={9} md={10}>
-          <h1 className={classes.heading}>Log</h1>
+          <div style={{ display: 'flex', alignItems: "center", width: "95%" }}>
+            <img className={classes.backButton} src="/back.png" style={{ width: "30px", height: "30px", marginRight: "20px", cursor: "pointer" }} onClick={() => Router.push('/')} />
+            <h1 style={{ color: '#7e7e7e', fontFamily: 'Segoe UI', marginTop: "20px", marginBottom: '20px', textAlign: "left"}}>Log</h1>
+          </div>
           <Paper className={classes.paper}>
             <List className={classes.root}>
               {

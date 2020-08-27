@@ -29,6 +29,12 @@ const useStyles = makeStyles((theme) => ({
     fontFamily: 'Segoe UI Semibold',
     fontSize: '20px',
     color: '	#7e7e7e',
+  },
+  backButton: {
+    display: "none",
+    [theme.breakpoints.down("xs")]: {
+      display: "block"
+    },
   }
 }));
 
@@ -51,7 +57,10 @@ export default function WiFiScanMobile({ baseURL }) {
 
   return (
     <Container>
-      <h1 style={{ color: '#7e7e7e', fontWeight: 'bold', fontFamily: 'Segoe UI ' }}>WiFi</h1>
+       <div style={{ display: 'flex', alignItems: "center", width: "95%" }}>
+            <img className={classes.backButton} src="/back.png" style={{ width: "30px", height: "30px", marginRight: "20px", cursor: "pointer" }} onClick={() => Router.push('/')} />
+            <h1 style={{ color: '#7e7e7e', fontFamily: 'Segoe UI', marginTop: "20px", marginBottom: '20px', textAlign: "left"}}>Wifi</h1>
+          </div>
       <List component="nav" className={classes.root}>
         <Button onClick={scanWifi} className={classes.button}>Scan</Button>
         {data.map((ssid, key) => (
