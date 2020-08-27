@@ -81,7 +81,7 @@ const useStyles = makeStyles((theme) => ({
     width: "100%",
     height: "65%",
     position: "relative",
-    padding: theme.spacing(2),
+    padding: "20px 0px 0px 0px",
     backgroundColor: "#dae3f0",
     borderRadius: "10px",
     display: "flex",
@@ -90,12 +90,12 @@ const useStyles = makeStyles((theme) => ({
     marginTop: "17px",
     [theme.breakpoints.down("sm")]: {
       marginTop: "80px",
-      padding: "10px",
+      padding: "10px 0px 0px 0px",
       height: "300px"
     },
     [theme.breakpoints.down("xs")]: {
       marginTop: "80px",
-      padding: "10px",
+      padding: "10px 0px 0px 0px",
       height: "250px"
     },
   },
