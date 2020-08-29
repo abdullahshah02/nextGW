@@ -2,7 +2,17 @@ import React from 'react';
 import Head from 'next/head';
 import '../styles/styles.css';
 import PropTypes from 'prop-types';
+import CssBaseline from "@material-ui/core/CssBaseline";
 import getBaseURL from '../utils/baseURL';
+import { MuiThemeProvider, createMuiTheme } from "@material-ui/core/styles";
+
+const themeLight = createMuiTheme({
+  palette: {
+    background: {
+      default: "#FFFFFF"
+    }
+  }
+});
 
 export default function MyApp(props) {
   const { Component, pageProps } = props;
@@ -18,6 +28,8 @@ export default function MyApp(props) {
   }, []);
 
   return (
+    <MuiThemeProvider theme={themeLight}>
+      <CssBaseline />
     <React.Fragment>
       <Head>
         <title>WiFi App</title>
@@ -25,6 +37,7 @@ export default function MyApp(props) {
       </Head>
       {baseURL ? <Component {...pageProps} baseURL={baseURL} /> : null}
     </React.Fragment>
+    </MuiThemeProvider>
   );
 }
 

@@ -77,7 +77,7 @@ const useStyles = makeStyles((theme) => ({
   },
   video: {
     width: "100%",
-    height: "86.5%",
+    height: "85.5%",
     padding: theme.spacing(2),
     backgroundColor: "#dae3f0",
     borderRadius: "10px",

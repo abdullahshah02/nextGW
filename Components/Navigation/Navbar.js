@@ -3,11 +3,14 @@ import { makeStyles } from "@material-ui/core/styles";
 import Paper from "@material-ui/core/Paper";
 import Grid from "@material-ui/core/Grid";
 import Router from "next/router";
-import getBaseURL from '../../utils/baseURL';
 
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
+    paddingTop: "40px",
+    [theme.breakpoints.down("xs")]: {
+      paddingTop: "0px"
+    },
   },
   grid: {
     display: "flex",
@@ -18,15 +21,14 @@ const useStyles = makeStyles((theme) => ({
   },
   PaperDesk: {
     padding: theme.spacing(2),
-    height: "7rem",
-    width: "5rem",
+    height: "8.5rem",
+    width: "5.5rem",
     textAlign: "center",
     fontFamily: "Segoe UI ",
-    fontSize: "20px",
+    fontSize: "16px",
     color: "#7e7e7e",
     backgroundColor: "#dae3f0",
     borderRadius: "8px",
-    //boxShadow: "5px 6px 13px  grey",
     cursor: "pointer",
     display: "flex",
     alignItems: "center",
@@ -39,8 +41,8 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   PaperMob: {
-    height: "7rem",
-    width: "5rem",
+    height: "12rem",
+    width: "8rem",
     display: "none",
     padding: theme.spacing(2),
     textAlign: "center",
@@ -74,11 +76,6 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Navbar() {
   const classes = useStyles();
-
-  let baseURL;
-  React.useEffect(() => {
-    baseURL = getBaseURL(window);
-  }, [])
 
   return (
     <div className={classes.root}>

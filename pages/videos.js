@@ -38,7 +38,8 @@ const useStyles = makeStyles((theme) => ({
     padding: theme.spacing(0),
     textAlign: "left",
     width: "100%",
-    height: "642px",
+    height: "570px",
+    marginTop: "-35px",
     fontFamily: "Segoe UI",
     fontSize: "20px",
     color: "#7e7e7e",
@@ -52,6 +53,7 @@ const useStyles = makeStyles((theme) => ({
     [theme.breakpoints.down("xs")]: {
       fontSize: "24px",
       height: "80%",
+      marginTop: "0",
     },
   },
   main: {
@@ -79,7 +81,7 @@ const useStyles = makeStyles((theme) => ({
   },
   video: {
     width: "100%",
-    height: "65%",
+    height: "75%",
     position: "relative",
     padding: "20px 0px 0px 0px",
     backgroundColor: "#dae3f0",
@@ -199,8 +201,7 @@ const Videos = ({ baseURL }) => {
               <Navbar />
             </Grid>
             <Grid className={classes.main} item xs={12} sm={3} md={2}>
-
-              <h1 style={{ color: '#7e7e7e', fontWeight: 'bold', fontFamily: 'Segoe UI', margin: '0' }}>Videos</h1>
+              <h1 style={{ color: '#7e7e7e', fontWeight: 'bold', fontFamily: 'Segoe UI', marginBottom: "0px" }}>Videos</h1>
               <div className={classes.column}>
                 <Paper className={classes.paper}>
                   <List component="nav" className={classes.root}>
@@ -259,9 +260,9 @@ const Videos = ({ baseURL }) => {
         {modal
           ? <div class={classes.modal}>
             <div class={classes.modalContent}>
-              
-            <div class={classes.close} onClick={() => setModal(false)}>&times;</div>
-              <div className={classes.video} style={{display: "block"}}>
+
+              <div class={classes.close} onClick={() => setModal(false)}>&times;</div>
+              <div className={classes.video} style={{ display: "block" }}>
                 <ReactPlayer
                   style={{ borderRadius: "10px", overflow: "hidden" }}
                   url={url}
@@ -275,56 +276,56 @@ const Videos = ({ baseURL }) => {
           : null
         }
 
-      </div>
-      <Grid className={classes.main} item xs={12} sm={12}>
-        <div style={{ display: 'flex', alignItems: "center" }}>
-          <img src="/back.png" style={{ width: "30px", height: "30px", marginRight: "20px", cursor: "pointer" }} onClick={() => Router.push('/')} />
-          <h1 style={{ color: '#7e7e7e', fontFamily: 'Segoe UI', marginTop: "20px", marginBottom: '20px' }}>Videos</h1>
-        </div>
-        <div className={classes.column}>
-          <Paper className={classes.paper}>
-            <List component="nav" className={classes.root}>
+        <Grid className={classes.main} item xs={12} sm={12}>
+          <div style={{ display: 'flex', alignItems: "center" }}>
+            <img src="/back.png" style={{ width: "30px", height: "30px", marginRight: "20px", cursor: "pointer" }} onClick={() => Router.push('/')} />
+            <h1 style={{ color: '#7e7e7e', fontFamily: 'Segoe UI', marginTop: "20px", marginBottom: '20px' }}>Videos</h1>
+          </div>
+          <div className={classes.column}>
+            <Paper className={classes.paper}>
+              <List component="nav" className={classes.root}>
 
-              <ListItem divider>
-                <Button className={classes.dateButton} aria-controls="simple-menu" aria-haspopup="true" onClick={handleClick}>
-                  {currDate ? currDate : null}
-                </Button>
-                <Menu
-                  anchorEl={anchorEl}
-                  keepMounted
-                  open={Boolean(anchorEl)}
-                  onClose={handleClose}
-                >
-                  {dates
-                    ? dates.map((date, key) => {
-                      return <MenuItem key={key} onClick={handleClose} id={date}>{date}</MenuItem>
-                    })
-                    : null
-                  }
-                </Menu>
-              </ListItem>
-
-              {currVideos
-                ? currVideos.map((video, key) => (
-                  <ListItem
-                    key={key}
-                    button
-                    divider
-                    onClick={() => {
-                      setModal(true)
-                      setUrl(video.url)
-                    }}
-                    style={{ display: "flex", flexDirection: "column", justifyContent: "left" }}
+                <ListItem divider>
+                  <Button className={classes.dateButton} aria-controls="simple-menu" aria-haspopup="true" onClick={handleClick}>
+                    {currDate ? currDate : null}
+                  </Button>
+                  <Menu
+                    anchorEl={anchorEl}
+                    keepMounted
+                    open={Boolean(anchorEl)}
+                    onClose={handleClose}
                   >
-                    <ListItemText className={classes.item}>{video.time}</ListItemText>
-                  </ListItem>
-                ))
-                : null
-              }
-            </List>
-          </Paper>
-        </div>
-    </Grid>
+                    {dates
+                      ? dates.map((date, key) => {
+                        return <MenuItem key={key} onClick={handleClose} id={date}>{date}</MenuItem>
+                      })
+                      : null
+                    }
+                  </Menu>
+                </ListItem>
+
+                {currVideos
+                  ? currVideos.map((video, key) => (
+                    <ListItem
+                      key={key}
+                      button
+                      divider
+                      onClick={() => {
+                        setModal(true)
+                        setUrl(video.url)
+                      }}
+                      style={{ display: "flex", flexDirection: "column", justifyContent: "left" }}
+                    >
+                      <ListItemText className={classes.item}>{video.time}</ListItemText>
+                    </ListItem>
+                  ))
+                  : null
+                }
+              </List>
+            </Paper>
+          </div>
+        </Grid>
+      </div>
     </>
   );
 };

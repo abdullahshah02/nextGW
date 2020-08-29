@@ -63,8 +63,8 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: "center",
     [theme.breakpoints.down("xs")]: {
       fontSize: "24px",
-      width: "85%",
-      height: "20px",
+      width: "88%",
+      height: "50px",
     },
   },
   typo: {
@@ -103,9 +103,10 @@ export default function FullWidthGrid({ baseURL }) {
           <Navbar />
         </Grid>
         <Grid className={classes.main} item xs={12} sm={6} md={8}>
-          <div className={classes.WiFi}>
+          <div>
             <h1
               style={{
+                marginBottom: "60px",
                 color: "#7e7e7e",
                 fontWeight: "bold",
                 fontFamily: "Segoe UI ",

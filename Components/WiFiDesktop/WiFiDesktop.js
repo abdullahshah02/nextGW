@@ -10,18 +10,19 @@ const useStyles = makeStyles((theme) => ({
     maxWidth: 360,
     backgroundColor: theme.palette.background.paper,
   },
-  box: {
-    border: "1px ",
-    boxShadow: "1px 1px 4px grey",
+  button: {
+    border: "1px solid #7e7e7e",
+    color: "#7e7e7e",
     overflowY: "auto",
-    backgroundColor: "#f2f2f2",
-    borderRadius: "1rem",
-    height: "23rem",
-    width: "30rem",
+    borderRadius: "0",
+    backgroundColor: "transparent",
+    width: "100.3% !important",
     display: "flex",
     flexDirection: "column",
-    justifyContent: "space-evenly",
+    justifyContent: "center",
     alignItems: "center",
+    fontSize: "20px",
+    fontFamily: "Segoe UI",
     [theme.breakpoints.down("sm")]: {
       width: "20rem",
     },
@@ -36,10 +37,28 @@ const useStyles = makeStyles((theme) => ({
       marginLeft: "0",
     },
   },
+  listItem: {
+    width: '80%',
+    display: 'flex',
+    justifyContent: 'space-between',
+    position: 'relative',
+    padding: "20px"
+  },
+  listBox: {
+    border: "1px solid #7e7e7e",
+    borderTop: "0",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    flexDirection: "column",
+    width: "100%"
+  }
 }));
 
+// const INIT_STATE = [{ name: "SSID1" }, { name: "SSID2" }, { name: "SSID3" }];
+
 export default function WiFiDesktop({ baseURL }) {
-  const [data, setData] = useState([]);
+  const [data, setData] = useState(null);
   // const [isClicked, setIsClicked] = useState(false); --> is this needed?
 
   const classes = useStyles();
@@ -113,58 +132,20 @@ export default function WiFiDesktop({ baseURL }) {
 
   return (
     <div className={classes.box}>
-      {
-        data.map((ssid, key) => (
-          <div
-            style={{
-              borderBottom: '1px solid',
-              width: '80%',
-              display: 'flex',
-              justifyContent: 'space-between',
-              position: 'relative'
-            }}
-            key={key}
-          >
-            <div id={`${ssid.name}-label`} className={classes.Label}>
-              {ssid.name}
-            </div>
-            <div style={{ position: 'absolute', top: '-4px', left: '35%' }}>
-              <Input
-                id={`${ssid.name}-pwd`}
-                className={classes.INPUT}
-                disableUnderline={true}
-                placeholder="Enter Password"
-                onChange={handleChange}
-              />
-            </div>
-          </div>
-        ))
-      }
 
       <div id="scan-button-container">
         <Button
+          className={classes.button}
           onClick={scanWifi}
-          style={{
-            width: "14rem",
-            width: "14rem",
-            color: "#7e7e7e",
-            fontFamily: "Segoe UI Semibold",
-          }}
-          variant="contained"
         >
-          SCAN
+          Tap to Scan
         </Button>
       </div>
 
       <div id="connect-button-container" style={{ display: 'none' }}>
         <Button
           onClick={connectWifi}
-          style={{
-            width: "14rem",
-            width: "14rem",
-            color: "#7e7e7e",
-            fontFamily: "Segoe UI Semibold",
-          }}
+          className={classes.button}
           variant="contained"
         >
           CONNECT
@@ -174,17 +155,40 @@ export default function WiFiDesktop({ baseURL }) {
       <div id="back-button-container" style={{ display: 'none' }}>
         <Button
           onClick={backToScan}
-          style={{
-            width: "14rem",
-            width: "14rem",
-            color: "#7e7e7e",
-            fontFamily: "Segoe UI Semibold",
-          }}
+          className={classes.button}
           variant="contained"
         >
           BACK
         </Button>
       </div>
+
+      {data ?
+        <div className={classes.listBox}>
+          {
+            data ? data.map((ssid, key) => (
+              <div
+                className={classes.listItem}
+                key={key}
+              >
+                <div id={`${ssid.name}-label`} className={classes.Label}>
+                  {ssid.name}
+                </div>
+                <div style={{ position: 'absolute', top: '-4px', left: '35%', padding: "20px" }}>
+                  <Input
+                    id={`${ssid.name}-pwd`}
+                    className={classes.INPUT}
+                    disableUnderline={true}
+                    placeholder="Enter Password"
+                    onChange={handleChange}
+                  />
+                </div>
+              </div>
+            ))
+              : null
+          }
+        </div>
+        : null
+      }
 
     </div>
   );
