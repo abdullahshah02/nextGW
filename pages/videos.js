@@ -16,7 +16,6 @@ import _ from 'underscore';
 import moment from 'moment';
 import Router from "next/router";
 
-
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
@@ -104,6 +103,7 @@ const useStyles = makeStyles((theme) => ({
   dateButton: {
     color: "#7e7e7e",
     width: "100%",
+    textTransform: "none",
     [theme.breakpoints.down("sm")]: {
       fontSize: "16px"
     }
@@ -174,6 +174,38 @@ const Videos = ({ baseURL }) => {
     setAnchorEl(null);
   };
 
+  const nth = (d) => {
+    if (d > 3 && d < 21) return 'th';
+    switch (d % 10) {
+      case 1: return "st";
+      case 2: return "nd";
+      case 3: return "rd";
+      default: return "th";
+    }
+  }
+
+  const formatDate = (input_date) => {
+    const months = {
+      1: 'January',
+      2: 'February',
+      3: 'March',
+      4: 'April',
+      5: 'May',
+      6: 'June',
+      7: 'July',
+      8: 'August',
+      9: 'September',
+      10: 'October',
+      11: 'November',
+      12: 'December'
+    };
+    const split_date = input_date.split('-');
+    const number_month = split_date[1][0] === '0' ? split_date[1][1] : split_date[1];
+    const date = parseInt(split_date[2][0] === '0' ? split_date[2][1] : split_date[2]);
+    const month = months[number_month];
+    return `${month} ${date}${nth(date)}, ${split_date[0]}`;
+  }
+
   React.useEffect(() => {
     async function getVideos() {
       try {
@@ -192,6 +224,9 @@ const Videos = ({ baseURL }) => {
     getVideos();
   }, []);
 
+
+
+
   return (
     <>
       <div className={classes.desktop}>
@@ -208,7 +243,7 @@ const Videos = ({ baseURL }) => {
 
                     <ListItem divider>
                       <Button className={classes.dateButton} aria-controls="simple-menu" aria-haspopup="true" onClick={handleClick}>
-                        {currDate ? currDate : null}
+                        {currDate ? formatDate(currDate) : null}
                       </Button>
                       <Menu
                         anchorEl={anchorEl}
@@ -218,7 +253,7 @@ const Videos = ({ baseURL }) => {
                       >
                         {dates
                           ? dates.map((date, key) => {
-                            return <MenuItem key={key} onClick={handleClose} id={date}>{date}</MenuItem>
+                            return <MenuItem key={key} onClick={handleClose} id={date}>{formatDate(date)}</MenuItem>
                           })
                           : null
                         }
@@ -287,7 +322,7 @@ const Videos = ({ baseURL }) => {
 
                 <ListItem divider>
                   <Button className={classes.dateButton} aria-controls="simple-menu" aria-haspopup="true" onClick={handleClick}>
-                    {currDate ? currDate : null}
+                    {currDate ? formatDate(currDate) : null}
                   </Button>
                   <Menu
                     anchorEl={anchorEl}
@@ -297,7 +332,7 @@ const Videos = ({ baseURL }) => {
                   >
                     {dates
                       ? dates.map((date, key) => {
-                        return <MenuItem key={key} onClick={handleClose} id={date}>{date}</MenuItem>
+                        return <MenuItem key={key} onClick={handleClose} id={date}>{formatDate(date)}</MenuItem>
                       })
                       : null
                     }
