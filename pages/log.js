@@ -153,7 +153,7 @@ export default function Log({ baseURL }) {
                     <ListItem key={key} style={{ paddingBottom: "20px", display: "flex", alignItems: "flex-start", flexDirection: "column" }}>
                       <div className={classes.item} style={{width: "100%", marginBottom: "10px" }}>{line[1]}</div>
                       <div style={{ paddingBottom: "20px", display: "flex" }}>
-                        <div className={classes.item}  style={{ marginRight: "160px" }}>{line[0]}</div>
+                        <div className={classes.item}  style={{ marginRight: "140px" }}>{line[0]}</div>
                         {line[2] === 'ERROR' ? <div className={classes.bar} /> : <div className={classes.bar} style={{ backgroundColor: "#00e061" }} />}
                       </div>
 
