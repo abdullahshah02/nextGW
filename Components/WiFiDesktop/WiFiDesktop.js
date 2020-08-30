@@ -59,7 +59,8 @@ const useStyles = makeStyles((theme) => ({
 
 export default function WiFiDesktop({ baseURL }) {
   const [data, setData] = useState(null);
-  // const [isClicked, setIsClicked] = useState(false); --> is this needed?
+  const [connect, setConnect] = React.useState('Connect');
+  const [scan, setScan] = React.useState('Tap to Scan');
 
   const classes = useStyles();
 
@@ -85,6 +86,7 @@ export default function WiFiDesktop({ baseURL }) {
 
   const scanWifi = async () => {
     try {
+      setScan('Scanning...');
       const url = `${baseURL}/api/scan_wifi`;
       const response = await axios.get(url);
       const { ssid_list } = response.data;
@@ -92,9 +94,12 @@ export default function WiFiDesktop({ baseURL }) {
       document.getElementById('scan-button-container').style.display = 'none';
       document.getElementById('connect-button-container').style.display = 'block';
       document.getElementById('back-button-container').style.display = 'block';
+      setScan('Tap to Scan');
     }
     catch (error) {
       console.log(error);
+      setScan('Unable to Scan');
+      setTimeout(() => setScan('Tap to Scan'), 2000);
     }
   };
 
@@ -107,6 +112,7 @@ export default function WiFiDesktop({ baseURL }) {
 
   const connectWifi = async () => {
     try {
+      setConnect('Connecting...');
       const ssid = [];
       for (let i = 0; i < data.length; i++) {
         if (data[i].password) {
@@ -124,9 +130,13 @@ export default function WiFiDesktop({ baseURL }) {
       const payload = { name: ssid[0], password: ssid[1] };
       const response = await axios.post(url, payload);
       alert(response.data.message);
+      etConnect('Connected!')
+      setTimeout(() => setConnect('Connect'), 2000);
     }
     catch (error) {
       console.log(error);
+      setConnect('Unable to Connect');
+      setTimeout(() => setConnect('Connect'), 2000);
     }
   }
 
@@ -138,7 +148,7 @@ export default function WiFiDesktop({ baseURL }) {
           className={classes.button}
           onClick={scanWifi}
         >
-          Tap to Scan
+          {scan}
         </Button>
       </div>
 
@@ -146,9 +156,8 @@ export default function WiFiDesktop({ baseURL }) {
         <Button
           onClick={connectWifi}
           className={classes.button}
-          variant="contained"
         >
-          CONNECT
+          {connect}
         </Button>
       </div>
 
@@ -156,7 +165,6 @@ export default function WiFiDesktop({ baseURL }) {
         <Button
           onClick={backToScan}
           className={classes.button}
-          variant="contained"
         >
           BACK
         </Button>

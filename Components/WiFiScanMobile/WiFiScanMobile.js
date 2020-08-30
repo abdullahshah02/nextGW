@@ -20,7 +20,7 @@ const useStyles = makeStyles((theme) => ({
     overflowY: "auto",
     borderRadius: "0",
     backgroundColor: "transparent",
-    width: "100.3% !important",
+    width: "100.1% !important",
     display: "flex",
     flexDirection: "column",
     justifyContent: "center",
@@ -40,7 +40,13 @@ const useStyles = makeStyles((theme) => ({
       padding: "2rem",
     },
   },
+  list: {
+    border: "1px solid #7e7e7e",
+    borderTop: "0"
+  }
 }));
+
+// const INIT_STATE = [{ name: "SSID1" }, { name: "SSID2" }, { name: "SSID3" }];
 
 export default function WiFiScanMobile({ baseURL }) {
   const classes = useStyles();
@@ -66,13 +72,14 @@ export default function WiFiScanMobile({ baseURL }) {
         <img className={classes.backButton} src="/back.png" style={{ width: "30px", height: "30px", marginRight: "20px", cursor: "pointer" }} onClick={() => Router.push('/')} />
         <h1 style={{ color: '#7e7e7e', fontFamily: 'Segoe UI', marginTop: "20px", marginBottom: '20px', textAlign: "left" }}>Wifi</h1>
       </div>
-      <List component="nav">
-        <Button onClick={scanWifi} className={classes.button}>Scan</Button>
-        {data.map((ssid, key) => (
+      
+      <Button onClick={scanWifi} className={classes.button}>Scan</Button>
+      <List component="nav" className={classes.list}>
+        {data ? data.map((ssid, key) => (
           <ListItem onClick={() => Router.push({ pathname: '/connect', query: { ssid: ssid.name } })} button divider>
             <ListItemText className={classes.item}><span style={{ fontFamily: 'Segoe UI Semibold' }}>{ssid.name}</span></ListItemText>
           </ListItem>
-        ))}
+        )) : null}
       </List>
     </Container>
     </Grid>
