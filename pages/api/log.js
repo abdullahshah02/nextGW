@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { filter } from 'underscore';
 
 export default async (req, res) => {
 	try {
@@ -16,7 +17,7 @@ export default async (req, res) => {
 
 			let message;
 			if (content) {
-				message = content[1].endsWith('.') ? content[1].substring(0, content[1].length-1).toUpperCase() : content[1].toUpperCase();
+				message = content[1].endsWith('.') ? content[1].substring(0, content[1].length - 1).toUpperCase() : content[1].toUpperCase();
 			}
 
 			let formattedTime;
@@ -26,9 +27,12 @@ export default async (req, res) => {
 				formattedTime = formatTime(`${hours}.${minutes}`);
 			}
 
-			return [formattedTime, message];
+			return [formattedTime, message, content ? content[0] : null];
 		})
-		res.status(200).json({ log: log_v2 });
+		const filtered = log_v2.filter(function (el) {
+			return el[0] != null && el[1] != null;
+		});
+		res.status(200).json({ log: filtered });
 	}
 	catch (error) {
 		console.log(error);

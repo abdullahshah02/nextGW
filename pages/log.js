@@ -33,8 +33,29 @@ const useStyles = makeStyles((theme) => ({
     display: "flex",
     justifyContent: "center",
     //boxShadow: "5px 6px 13px  grey",
+    [theme.breakpoints.down("sm")]: {
+      width: "100%",
+    },
     [theme.breakpoints.down("xs")]: {
-      padding: theme.spacing(4),
+      display: "none"
+    },
+  },
+  paperMobile: {
+    display: "none",
+    [theme.breakpoints.down("xs")]: {
+      padding: "20px",
+      textAlign: "left",
+      width: "100%",
+      height: "555px",
+      overflowY: "auto",
+      fontFamily: "Segoe UI",
+      fontSize: "20px",
+      marginTop: '20px',
+      color: "#7e7e7e",
+      backgroundColor: "#fff",
+      borderRadius: "10px",
+      display: "flex",
+      justifyContent: "center",
     },
   },
   main: {
@@ -47,13 +68,6 @@ const useStyles = makeStyles((theme) => ({
       flexDirection: "column"
     },
   },
-  offline: {
-    [theme.breakpoints.down("xs")]: {
-      display: "flex",
-      alignItems: "center",
-      justifyContent: "center",
-    },
-  },
   typo: {
     display: "none",
     color: "#7e7e7e",
@@ -64,42 +78,9 @@ const useStyles = makeStyles((theme) => ({
       display: "block",
     },
   },
-  box: {
-    border: "1px ",
-    boxShadow: "1px 1px 4px grey",
-    backgroundColor: "#f2f2f2",
-    borderRadius: "1rem",
-    height: "23rem",
-    width: "30rem",
-    display: "flex",
-    flexDirection: "column",
-    justifyContent: "space-evenly",
-    alignItems: "center",
-    [theme.breakpoints.down("sm")]: {
-      width: "20rem",
-    },
-  },
   header: {
     [theme.breakpoints.down("xs")]: {
       display: "none"
-    },
-  },
-  heading: {
-    color: '#7e7e7e',
-    fontWeight: 'bold',
-    fontFamily: 'Segoe UI',
-    margin: '0',
-    width: '100%',
-    textAlign: 'left',
-    [theme.breakpoints.down("xs")]: {
-      backgroundColor: "#dae3f0",
-      borderRadius: "10px",
-      display: "flex",
-      alignItems: "center",
-      justifyContent: "center",
-      height: "60px",
-      marginBottom: "-30px",
-      zIndex: "5"
     },
   },
   backButton: {
@@ -108,6 +89,14 @@ const useStyles = makeStyles((theme) => ({
       display: "block"
     },
   },
+  bar: {
+    height: "12px",
+    width: "40px",
+    backgroundColor: "#f00202",
+    display: "inline-block",
+    marginTop: "8px",
+    border: "1px solid #7e7e7e"
+  }
 }));
 
 export default function Log({ baseURL }) {
@@ -139,16 +128,35 @@ export default function Log({ baseURL }) {
         <Grid className={classes.main} item xs={12} sm={9} md={10}>
           <div style={{ display: 'flex', alignItems: "center", width: "95%" }}>
             <img className={classes.backButton} src="/back.png" style={{ width: "30px", height: "30px", marginRight: "20px", cursor: "pointer" }} onClick={() => Router.push('/')} />
-            <h1 style={{ color: '#7e7e7e', fontFamily: 'Segoe UI', marginTop: "20px", marginBottom: '20px', textAlign: "left"}}>Log</h1>
+            <h1 style={{ color: '#7e7e7e', fontFamily: 'Segoe UI', marginTop: "20px", marginBottom: '20px', textAlign: "left" }}>Log</h1>
           </div>
           <Paper className={classes.paper}>
             <List className={classes.root}>
               {
                 log
                   ? log.map((line, key) => (
-                    <ListItem key={key} style={{marginLeft: "40px", paddingBottom: "20px"}}>
-                      <div className={classes.item} style={{marginRight: "60px", width: "150px"}}>{line[0]}</div>
-                      <div className={classes.item} style={{marginRight: "60px", width: "60%"}}>{line[1]}</div>
+                    <ListItem key={key} style={{ paddingBottom: "20px", display: "flex", alignItems: "flex-start" }}>
+                      <div className={classes.item} style={{ marginRight: "60px", width: "150px" }}>{line[0]}</div>
+                      <div className={classes.item} style={{ marginRight: "60px", width: "60%" }}>{line[1]}</div>
+                      {line[2] === 'ERROR' ? <div className={classes.bar} /> : <div className={classes.bar} style={{ backgroundColor: "#00e061" }} />}
+                    </ListItem>
+                  ))
+                  : null
+              }
+            </List>
+          </Paper>
+          <Paper className={classes.paperMobile}>
+            <List className={classes.root}>
+              {
+                log
+                  ? log.map((line, key) => (
+                    <ListItem key={key} style={{ paddingBottom: "20px", display: "flex", alignItems: "flex-start", flexDirection: "column" }}>
+                      <div className={classes.item} style={{width: "100%", marginBottom: "10px" }}>{line[1]}</div>
+                      <div style={{ paddingBottom: "20px", display: "flex" }}>
+                        <div className={classes.item}  style={{ marginRight: "160px" }}>{line[0]}</div>
+                        {line[2] === 'ERROR' ? <div className={classes.bar} /> : <div className={classes.bar} style={{ backgroundColor: "#00e061" }} />}
+                      </div>
+
                     </ListItem>
                   ))
                   : null
