@@ -19,20 +19,20 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   paper: {
-    padding: theme.spacing(2),
-    textAlign: "center",
+    padding: "40px",
+    textAlign: "left",
     width: "78%",
+    height: "555px",
+    overflowY: "auto",
     fontFamily: "Segoe UI",
     fontSize: "20px",
     marginTop: '20px',
     color: "#7e7e7e",
     backgroundColor: "#fff",
     borderRadius: "10px",
-    //boxShadow: "5px 6px 13px  grey",
-    cursor: "pointer",
     display: "flex",
-    alignItems: "center",
     justifyContent: "center",
+    //boxShadow: "5px 6px 13px  grey",
     [theme.breakpoints.down("xs")]: {
       padding: theme.spacing(4),
     },
@@ -107,7 +107,7 @@ const useStyles = makeStyles((theme) => ({
     [theme.breakpoints.down("xs")]: {
       display: "block"
     },
-  }
+  },
 }));
 
 export default function Log({ baseURL }) {
@@ -146,8 +146,9 @@ export default function Log({ baseURL }) {
               {
                 log
                   ? log.map((line, key) => (
-                    <ListItem button divider key={key}>
-                      <ListItemText className={classes.item}>{line.join(' - ')}</ListItemText>
+                    <ListItem key={key} style={{marginLeft: "40px", paddingBottom: "20px"}}>
+                      <div className={classes.item} style={{marginRight: "60px", width: "150px"}}>{line[0]}</div>
+                      <div className={classes.item} style={{marginRight: "60px", width: "60%"}}>{line[1]}</div>
                     </ListItem>
                   ))
                   : null
