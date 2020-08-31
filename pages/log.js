@@ -96,6 +96,31 @@ const useStyles = makeStyles((theme) => ({
     display: "inline-block",
     marginTop: "8px",
     border: "1px solid #7e7e7e"
+  },
+  greyBar: {
+    height: "18px",
+    width: "100px",
+    backgroundColor: "#b0b0b0",
+    display: "inline-block",
+    marginTop: "8px",
+    border: "1px solid #7e7e7e",
+    [theme.breakpoints.down("sm")]: {
+      width: "25%",
+      height: "28px"
+    },
+    [theme.breakpoints.down("xs")]: {
+      width: "80%"
+     }
+  },
+  list: {
+    width: "100%",
+  },
+  listItem: {
+    width: "100%",
+    justifyContent: "space-between",
+    [theme.breakpoints.down("xs")]: {
+     justifyContent: "center"
+    }
   }
 }));
 
@@ -131,7 +156,7 @@ export default function Log({ baseURL }) {
             <h1 style={{ color: '#7e7e7e', fontFamily: 'Segoe UI', marginTop: "20px", marginBottom: '20px', textAlign: "left" }}>Log</h1>
           </div>
           <Paper className={classes.paper}>
-            <List className={classes.root}>
+            <List className={classes.list}>
               {
                 log
                   ? log.map((line, key) => (
@@ -141,25 +166,39 @@ export default function Log({ baseURL }) {
                       {line[2] === 'ERROR' ? <div className={classes.bar} /> : <div className={classes.bar} style={{ backgroundColor: "#00e061" }} />}
                     </ListItem>
                   ))
-                  : null
+                  : <>
+                    <ListItem className={classes.listItem}><div className={classes.greyBar}></div><div className={classes.greyBar}></div><div className={classes.greyBar}></div></ListItem>
+                    <ListItem className={classes.listItem}><div className={classes.greyBar}></div><div className={classes.greyBar}></div><div className={classes.greyBar}></div></ListItem>
+                    <ListItem className={classes.listItem}><div className={classes.greyBar}></div><div className={classes.greyBar}></div><div className={classes.greyBar}></div></ListItem>
+                    <ListItem className={classes.listItem}><div className={classes.greyBar}></div><div className={classes.greyBar}></div><div className={classes.greyBar}></div></ListItem>
+                    <ListItem className={classes.listItem}><div className={classes.greyBar}></div><div className={classes.greyBar}></div><div className={classes.greyBar}></div></ListItem>
+                    <ListItem className={classes.listItem}><div className={classes.greyBar}></div><div className={classes.greyBar}></div><div className={classes.greyBar}></div></ListItem>
+                    <ListItem className={classes.listItem}><div className={classes.greyBar}></div><div className={classes.greyBar}></div><div className={classes.greyBar}></div></ListItem>
+                  </>
               }
             </List>
           </Paper>
           <Paper className={classes.paperMobile}>
-            <List className={classes.root}>
+            <List className={classes.list}>
               {
                 log
                   ? log.map((line, key) => (
                     <ListItem key={key} style={{ paddingBottom: "20px", display: "flex", alignItems: "flex-start", flexDirection: "column" }}>
-                      <div className={classes.item} style={{width: "100%", marginBottom: "10px" }}>{line[1]}</div>
+                      <div className={classes.item} style={{ width: "100%", marginBottom: "10px" }}>{line[1]}</div>
                       <div style={{ paddingBottom: "20px", display: "flex" }}>
-                        <div className={classes.item}  style={{ marginRight: "140px" }}>{line[0]}</div>
+                        <div className={classes.item} style={{ marginRight: "140px" }}>{line[0]}</div>
                         {line[2] === 'ERROR' ? <div className={classes.bar} /> : <div className={classes.bar} style={{ backgroundColor: "#00e061" }} />}
                       </div>
 
                     </ListItem>
                   ))
-                  : null
+                  : <>
+                   <ListItem className={classes.listItem}><div className={classes.greyBar} /></ListItem>
+                   <ListItem className={classes.listItem}><div className={classes.greyBar} /></ListItem>
+                   <ListItem className={classes.listItem}><div className={classes.greyBar} /></ListItem>
+                   <ListItem className={classes.listItem}><div className={classes.greyBar} /></ListItem>
+                   <ListItem className={classes.listItem}><div className={classes.greyBar} /></ListItem>
+                  </>
               }
             </List>
           </Paper>

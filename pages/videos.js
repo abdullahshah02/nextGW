@@ -49,10 +49,10 @@ const useStyles = makeStyles((theme) => ({
     cursor: "pointer",
     display: "flex",
     justifyContent: "center",
-    [theme.breakpoints.down("xs")]: {
+    [theme.breakpoints.down("sm")]: {
+      marginTop: "0",
       fontSize: "24px",
       height: "80%",
-      marginTop: "0",
     },
   },
   main: {
@@ -82,7 +82,7 @@ const useStyles = makeStyles((theme) => ({
     width: "100%",
     height: "75%",
     position: "relative",
-    padding: "20px 0px 0px 0px",
+    padding: "20px",
     backgroundColor: "#dae3f0",
     borderRadius: "10px",
     display: "flex",
@@ -149,6 +149,27 @@ const useStyles = makeStyles((theme) => ({
     alignItems: "center",
     justifyContent: "center",
     position: "relative",
+  },
+  greyBar: {
+    height: "18px",
+    width: "100px",
+    backgroundColor: "#b0b0b0",
+    display: "inline-block",
+    marginTop: "8px",
+    border: "1px solid #7e7e7e",
+    [theme.breakpoints.down("sm")]: {
+      width: "80%",
+      height: "22px"
+    }
+  },
+  listItem: {
+    justifyContent: "center"
+  },
+  videoLoader: {
+    width: "100%",
+    height: "100%",
+    backgroundColor: "#b0b0b0",
+    borderRadius: "10px",
   }
 }));
 
@@ -241,25 +262,31 @@ const Videos = ({ baseURL }) => {
                 <Paper className={classes.paper}>
                   <List component="nav" className={classes.root}>
 
-                    <ListItem divider>
-                      <Button className={classes.dateButton} aria-controls="simple-menu" aria-haspopup="true" onClick={handleClick}>
-                        {currDate ? formatDate(currDate) : null}
-                      </Button>
-                      <Menu
-                        anchorEl={anchorEl}
-                        keepMounted
-                        open={Boolean(anchorEl)}
-                        onClose={handleClose}
-                      >
-                        {dates
-                          ? dates.map((date, key) => {
-                            return <MenuItem key={key} onClick={handleClose} id={date}>{formatDate(date)}</MenuItem>
-                          })
-                          : null
-                        }
-                      </Menu>
-                    </ListItem>
+                    <ListItem divider className={classes.listItem}>
+                      {
+                        currDate ?
+                          <>
+                            <Button className={classes.dateButton} aria-controls="simple-menu" aria-haspopup="true" onClick={handleClick}>
+                              {formatDate(currDate)}
+                            </Button>
+                            <Menu
+                              anchorEl={anchorEl}
+                              keepMounted
+                              open={Boolean(anchorEl)}
+                              onClose={handleClose}
+                            >
+                              {dates
+                                ? dates.map((date, key) => {
+                                  return <MenuItem key={key} onClick={handleClose} id={date}>{formatDate(date)}</MenuItem>
+                                })
+                                : null
+                              }
+                            </Menu>
+                          </>
+                          : <div className={classes.greyBar}></div>
+                      }
 
+                    </ListItem>
                     {
                       currVideos
                         ? currVideos.map((video, key) => (
@@ -267,7 +294,12 @@ const Videos = ({ baseURL }) => {
                             <ListItemText className={classes.item}>{video.time}</ListItemText>
                           </ListItem>
                         ))
-                        : null
+                        : <>
+                          <ListItem className={classes.listItem}><div className={classes.greyBar}></div></ListItem>
+                          <ListItem className={classes.listItem}><div className={classes.greyBar}></div></ListItem>
+                          <ListItem className={classes.listItem}><div className={classes.greyBar}></div></ListItem>
+                          <ListItem className={classes.listItem}><div className={classes.greyBar}></div></ListItem>
+                        </>
                     }
                   </List>
                 </Paper>
@@ -276,13 +308,17 @@ const Videos = ({ baseURL }) => {
             <Grid className={classes.main} item xs={12} sm={6} md={8}>
               <div style={{ width: "100%", height: "100%", marginTop: "85px" }}>
                 <div className={classes.video}>
-                  <ReactPlayer
-                    style={{ borderRadius: "10px", overflow: "hidden" }}
-                    url={url}
-                    width='100%'
-                    height='100%'
-                    controls
-                  />
+                  {
+                    url ?
+                      <ReactPlayer
+                        style={{ borderRadius: "10px", overflow: "hidden" }}
+                        url={url}
+                        width='100%'
+                        height='100%'
+                        controls
+                      />
+                      : <div className={classes.videoLoader} />
+                  }
                 </div>
               </div>
             </Grid>
@@ -320,23 +356,29 @@ const Videos = ({ baseURL }) => {
             <Paper className={classes.paper}>
               <List component="nav" className={classes.root}>
 
-                <ListItem divider>
-                  <Button className={classes.dateButton} aria-controls="simple-menu" aria-haspopup="true" onClick={handleClick}>
-                    {currDate ? formatDate(currDate) : null}
-                  </Button>
-                  <Menu
-                    anchorEl={anchorEl}
-                    keepMounted
-                    open={Boolean(anchorEl)}
-                    onClose={handleClose}
-                  >
-                    {dates
-                      ? dates.map((date, key) => {
-                        return <MenuItem key={key} onClick={handleClose} id={date}>{formatDate(date)}</MenuItem>
-                      })
-                      : null
-                    }
-                  </Menu>
+                <ListItem divider className={classes.listItem}>
+                  {
+                    currDate ?
+                      <>
+                        <Button className={classes.dateButton} aria-controls="simple-menu" aria-haspopup="true" onClick={handleClick}>
+                          {formatDate(currDate)}
+                        </Button>
+                        <Menu
+                          anchorEl={anchorEl}
+                          keepMounted
+                          open={Boolean(anchorEl)}
+                          onClose={handleClose}
+                        >
+                          {dates
+                            ? dates.map((date, key) => {
+                              return <MenuItem key={key} onClick={handleClose} id={date}>{formatDate(date)}</MenuItem>
+                            })
+                            : null
+                          }
+                        </Menu>
+                      </>
+                      : <div className={classes.greyBar}></div>
+                  }
                 </ListItem>
 
                 {currVideos
@@ -354,7 +396,12 @@ const Videos = ({ baseURL }) => {
                       <ListItemText className={classes.item}>{video.time}</ListItemText>
                     </ListItem>
                   ))
-                  : null
+                  : <>
+                    <ListItem className={classes.listItem}><div className={classes.greyBar}></div></ListItem>
+                    <ListItem className={classes.listItem}><div className={classes.greyBar}></div></ListItem>
+                    <ListItem className={classes.listItem}><div className={classes.greyBar}></div></ListItem>
+                    <ListItem className={classes.listItem}><div className={classes.greyBar}></div></ListItem>
+                  </>
                 }
               </List>
             </Paper>
