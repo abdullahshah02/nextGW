@@ -52,6 +52,20 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: "center",
     flexDirection: "column",
     width: "100%"
+  },
+  text: {
+    marginTop: "60px",
+    fontFamily: "Segoe UI",
+    fontSize: "18px",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    flexDirection: "column",
+    marginBottom: "60px"
+  },
+  grey: {
+    color: "#7e7e7e",
+    margin: "0"
   }
 }));
 
@@ -91,9 +105,6 @@ export default function WiFiDesktop({ baseURL }) {
       const response = await axios.get(url);
       const { ssid_list } = response.data;
       setData(ssid_list);
-      document.getElementById('scan-button-container').style.display = 'none';
-      document.getElementById('connect-button-container').style.display = 'block';
-      document.getElementById('back-button-container').style.display = 'block';
       setScan('Tap to Scan');
     }
     catch (error) {
@@ -105,9 +116,6 @@ export default function WiFiDesktop({ baseURL }) {
 
   const backToScan = () => {
     setData([]);
-    document.getElementById('scan-button-container').style.display = 'block';
-    document.getElementById('connect-button-container').style.display = 'none';
-    document.getElementById('back-button-container').style.display = 'none';
   }
 
   const connectWifi = async () => {
@@ -123,6 +131,7 @@ export default function WiFiDesktop({ baseURL }) {
 
       if (ssid.length == 0) {
         alert('You did not enter a password for any SSID.');
+        setConnect('Connect')
         return;
       }
 
@@ -130,7 +139,7 @@ export default function WiFiDesktop({ baseURL }) {
       const payload = { name: ssid[0], password: ssid[1] };
       const response = await axios.post(url, payload);
       alert(response.data.message);
-      etConnect('Connected!')
+      setConnect('Connected!')
       setTimeout(() => setConnect('Connect'), 2000);
     }
     catch (error) {
@@ -143,56 +152,72 @@ export default function WiFiDesktop({ baseURL }) {
   return (
     <div className={classes.box}>
 
-      <div id="scan-button-container">
-        <Button
-          className={classes.button}
-          onClick={scanWifi}
-        >
-          {scan}
-        </Button>
-      </div>
+      {
+        !data
+          ? <div id="scan-button-container">
+            <Button
+              className={classes.button}
+              onClick={scanWifi}
+            >
+              {scan}
+            </Button>
+          </div>
+          : <>
+            <div id="connect-button-container">
+              <Button
+                onClick={connectWifi}
+                className={classes.button}
+              >
+                {connect}
+              </Button>
+            </div>
 
-      <div id="connect-button-container" style={{ display: 'none' }}>
-        <Button
-          onClick={connectWifi}
-          className={classes.button}
-        >
-          {connect}
-        </Button>
-      </div>
+            {/* <div id="back-button-container">
+              <Button
+                onClick={backToScan}
+                className={classes.button}
+              >
+                BACK
+              </Button>
+            </div> */}
+          </>
+      }
 
-      <div id="back-button-container" style={{ display: 'none' }}>
-        <Button
-          onClick={backToScan}
-          className={classes.button}
-        >
-          BACK
-        </Button>
-      </div>
+
+
 
       {data ?
         <div className={classes.listBox}>
           {
-            data ? data.map((ssid, key) => (
-              <div
-                className={classes.listItem}
-                key={key}
-              >
-                <div id={`${ssid.name}-label`} className={classes.Label}>
-                  {ssid.name}
+            connect != 'Connecting...'
+              ? data ? data.map((ssid, key) => (
+                <div
+                  className={classes.listItem}
+                  key={key}
+                >
+                  <div id={`${ssid.name}-label`} className={classes.Label}>
+                    {ssid.name}
+                  </div>
+                  <div style={{ position: 'absolute', top: '-4px', left: '35%', padding: "20px" }}>
+                    <Input
+                      id={`${ssid.name}-pwd`}
+                      className={classes.INPUT}
+                      disableUnderline={true}
+                      placeholder="Enter Password"
+                      onChange={handleChange}
+                    />
+                  </div>
                 </div>
-                <div style={{ position: 'absolute', top: '-4px', left: '35%', padding: "20px" }}>
-                  <Input
-                    id={`${ssid.name}-pwd`}
-                    className={classes.INPUT}
-                    disableUnderline={true}
-                    placeholder="Enter Password"
-                    onChange={handleChange}
-                  />
-                </div>
+              ))
+                : null
+              : <div className={classes.text}>
+                <p className={classes.grey}>Attempting to Connect.</p>
+                <p className={classes.grey}>This can take about 20 seconds</p>
+                <p className={classes.grey} style={{marginTop: "20px"}}><b>If the connection succeeds you'll receive</b></p>
+                <p className={classes.grey}><b>an email with the link to this app</b></p>
+                <p className={classes.grey} style={{marginTop: "20px"}}>If the device fails to connect, the hotspot will remain active</p>
+                <p className={classes.grey}>and you can attempt to connect again through this page</p>
               </div>
-            ))
-              : null
           }
         </div>
         : null

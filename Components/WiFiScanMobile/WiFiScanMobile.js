@@ -29,10 +29,6 @@ const useStyles = makeStyles((theme) => ({
     fontFamily: "Segoe UI",
   },
   backButton: {
-    display: "none",
-    [theme.breakpoints.down("xs")]: {
-      display: "block"
-    },
   },
   main: {
     padding: "4rem",
@@ -50,7 +46,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function WiFiScanMobile({ baseURL }) {
   const classes = useStyles();
-  const [data, setData] = useState([]);
+  const [data, setData] = useState(null);
 
   const scanWifi = async () => {
     try {

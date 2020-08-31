@@ -49,6 +49,25 @@ const useStyles = makeStyles((theme) => ({
     borderRight: "1px solid #7e7e7e",
     paddingLeft: "20px"
   },
+  text: {
+    paddingTop: "60px",
+    paddingBottom: "60px",
+    paddingLeft: "20px",
+    paddingRight: "20px",
+    fontFamily: "Segoe UI",
+    fontSize: "18px",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    flexDirection: "column",
+    border: "1px solid #7e7e7e",
+    borderTop: "0"
+  },
+  grey: {
+    color: "#7e7e7e",
+    margin: "0",
+    textAlign: "center"
+  }
 }));
 
 const Connect = ({ baseURL }) => {
@@ -79,9 +98,9 @@ const Connect = ({ baseURL }) => {
     ssid
       ? <Container className={classes.main}>
         <div style={{ display: 'flex', alignItems: "center", width: "95%" }}>
-        <img className={classes.backButton} src="/back.png" style={{ width: "30px", height: "30px", marginRight: "20px", cursor: "pointer" }} onClick={() => router.push('/')} />
-        <h1 style={{ color: '#7e7e7e', fontFamily: 'Segoe UI', marginTop: "20px", marginBottom: '20px', textAlign: "left" }}>Wifi</h1>
-      </div>
+          <img className={classes.backButton} src="/back.png" style={{ width: "30px", height: "30px", marginRight: "20px", cursor: "pointer" }} onClick={() => router.push('/wifi')} />
+          <h1 style={{ color: '#7e7e7e', fontFamily: 'Segoe UI', marginTop: "20px", marginBottom: '20px', textAlign: "left" }}>Wifi</h1>
+        </div>
         <Button className={classes.button}>
           {ssid}
         </Button>
@@ -96,7 +115,19 @@ const Connect = ({ baseURL }) => {
           onClick={connectWifi}
         >
           {connect}
-          </Button>
+        </Button>
+
+        {
+          connect === 'Connecting...'
+            ? <div className={classes.text}>
+              <p className={classes.grey}>Attempting to Connect.</p>
+              <p className={classes.grey}>This can take about 20 seconds</p>
+              <p className={classes.grey} style={{ marginTop: "20px" }}><b>If the connection succeeds you'll receive</b></p>
+              <p className={classes.grey}><b>an email with the link to this app</b></p>
+              <p className={classes.grey} style={{ marginTop: "20px" }}>If the device fails to connect, the hotspot will remain active and you can attempt to connect again through this page</p>
+            </div>
+            : null
+        }
       </Container>
       : null
   );
