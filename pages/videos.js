@@ -45,7 +45,6 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: "#fff",
     borderRadius: "8px",
     overflowY: "auto",
-    //boxShadow: "5px 6px 13px  grey",
     cursor: "pointer",
     display: "flex",
     justifyContent: "center",
@@ -153,10 +152,10 @@ const useStyles = makeStyles((theme) => ({
   greyBar: {
     height: "18px",
     width: "100px",
-    backgroundColor: "#b0b0b0",
+    backgroundColor: "#d1d1d1",
     display: "inline-block",
     marginTop: "8px",
-    border: "1px solid #7e7e7e",
+    boxShadow: "2px 2px 1px #a0a0a0",
     [theme.breakpoints.down("sm")]: {
       width: "80%",
       height: "22px"
@@ -168,8 +167,11 @@ const useStyles = makeStyles((theme) => ({
   videoLoader: {
     width: "100%",
     height: "100%",
-    backgroundColor: "#b0b0b0",
+    backgroundColor: "#d1d1d1",
     borderRadius: "10px",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center"
   }
 }));
 
@@ -317,7 +319,7 @@ const Videos = ({ baseURL }) => {
                         height='100%'
                         controls
                       />
-                      : <div className={classes.videoLoader} />
+                      : <div className={classes.videoLoader}><img src="/logo.png" alt="logo" style={{ width: "100px", borderRadius: "50%", boxShadow: "0px 5px 10px #a0a0a0" }} /></div>
                   }
                 </div>
               </div>
@@ -334,13 +336,17 @@ const Videos = ({ baseURL }) => {
 
               <div class={classes.close} onClick={() => setModal(false)}>&times;</div>
               <div className={classes.video} style={{ display: "block" }}>
-                <ReactPlayer
-                  style={{ borderRadius: "10px", overflow: "hidden" }}
-                  url={url}
-                  width='100%'
-                  height='100%'
-                  controls
-                />
+                {
+                  url ?
+                    <ReactPlayer
+                      style={{ borderRadius: "10px", overflow: "hidden" }}
+                      url={url}
+                      width='100%'
+                      height='100%'
+                      controls
+                    />
+                    : <div className={classes.videoLoader}><img src="/logo.png" alt="logo" style={{ width: "100px", borderRadius: "50%", boxShadow: "0px 5px 10px #a0a0a0" }} /></div>
+                }
               </div>
             </div>
           </div>
