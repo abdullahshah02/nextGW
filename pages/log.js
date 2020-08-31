@@ -100,10 +100,10 @@ const useStyles = makeStyles((theme) => ({
   greyBar: {
     height: "18px",
     width: "100px",
-    backgroundColor: "#b0b0b0",
+    backgroundColor: "#d1d1d1",
     display: "inline-block",
     marginTop: "8px",
-    border: "1px solid #7e7e7e",
+    boxShadow: "2px 2px 1px #a0a0a0",
     [theme.breakpoints.down("sm")]: {
       width: "25%",
       height: "28px"
