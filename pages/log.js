@@ -134,7 +134,7 @@ export default function Log({ baseURL }) {
         const url = `${baseURL}/api/log?baseURL=${baseURL}`;
         const response = await axios.get(url);
         setLog(response.data.log);
-        console.log(log);
+        console.log(response.data.log.length);
       }
       catch (error) {
         console.log(error);
@@ -161,8 +161,8 @@ export default function Log({ baseURL }) {
                 log
                   ? log.map((line, key) => (
                     <ListItem key={key} style={{ paddingBottom: "20px", display: "flex", alignItems: "flex-start" }}>
-                      <div className={classes.item} style={{ marginRight: "60px", width: "150px" }}>{line[0]}</div>
-                      <div className={classes.item} style={{ marginRight: "60px", width: "60%" }}>{line[1]}</div>
+                      <div className={classes.item} style={{ marginRight: "40px", width: "150px" }}>{line[0]}</div>
+                      <div className={classes.item} style={{ marginRight: "0px", width: "60%", wordWrap: "break-word" }}>{line[1]}</div>
                       {line[2] === 'ERROR' ? <div className={classes.bar} /> : <div className={classes.bar} style={{ backgroundColor: "#00e061" }} />}
                     </ListItem>
                   ))
