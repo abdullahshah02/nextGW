@@ -4,7 +4,7 @@ import { filter } from 'underscore';
 export default async (req, res) => {
 	try {
 		const { baseURL } = req.query;
-		const tunnel_path = `http://197bf69c73c4.ngrok.io/home/pi/glimpse-cam/glimpseLog.log`;
+		const tunnel_path = `http://c2072f2e345a.ngrok.io/home/pi/glimpse-cam/glimpseLog.log`;
 		const response = await axios.get(tunnel_path);
 		const log = response.data.split('\n').reverse();
 		const log_v1 = log.map(string => {
@@ -32,7 +32,11 @@ export default async (req, res) => {
 		const filtered = log_v2.filter(function (el) {
 			return el[0] != null && el[1] != null;
 		});
-		res.status(200).json({ log: filtered });
+
+		if (filtered.length > 2000)
+			res.status(200).json({ log: filtered.slice(0, 2000) });
+		else
+			res.status(200).json({ log: filtered });
 	}
 	catch (error) {
 		console.log(error);
