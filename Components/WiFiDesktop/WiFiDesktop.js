@@ -27,7 +27,7 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: "center",
   },
   button: {
-    borderRadius: "10px",
+    borderRadius: "0px",
     color: "#7e7e7e",
     overflowY: "auto",
     backgroundColor: "transparent",
@@ -173,12 +173,14 @@ export default function WiFiDesktop({ baseURL }) {
     <div className={classes.box}>
 
       <Paper>
-        <ListItem divider className={classes.someItem}>
+        <ListItem divider
+          className={classes.someItem}
+          style={{ padding: "0" }}
+        >
           {
             !data
               ? <Button
                 className={classes.button}
-                style={{ borderRadius: "10px" }}
                 onClick={scanWifi}
               >
                 {scan}
