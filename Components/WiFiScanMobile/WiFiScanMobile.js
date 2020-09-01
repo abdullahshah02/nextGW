@@ -16,9 +16,11 @@ const useStyles = makeStyles((theme) => ({
   },
   button: {
     border: "1px solid #7e7e7e",
+    borderRadius: "0px",
+    borderTopLeftRadius: "10px",
+    borderTopRightRadius: "10px",
     color: "#7e7e7e",
     overflowY: "auto",
-    borderRadius: "0",
     backgroundColor: "transparent",
     width: "100.1% !important",
     display: "flex",
@@ -38,7 +40,9 @@ const useStyles = makeStyles((theme) => ({
   },
   list: {
     border: "1px solid #7e7e7e",
-    borderTop: "0"
+    borderTop: "0",
+    borderBottomLeftRadius: "10px",
+    borderBottomRightRadius: "10px",
   }
 }));
 
@@ -47,17 +51,22 @@ const useStyles = makeStyles((theme) => ({
 export default function WiFiScanMobile({ baseURL }) {
   const classes = useStyles();
   const [data, setData] = useState(null);
+  const [scan, setScan] = useState('Tap to Scan');
 
   const scanWifi = async () => {
     try {
       //store this url in an env file
+      setScan('Scanning...');
       const url = `${baseURL}/api/scan_wifi`;
       const response = await axios.get(url);
       const { ssid_list } = response.data;
       setData(ssid_list);
+      setScan('Tap to Scan');
     }
     catch (error) {
       console.log(error);
+      setScan('Unable to Scan');
+      setTimeout(() => setScan('Tap to Scan'), 2000);
     }
   };
 
@@ -69,7 +78,7 @@ export default function WiFiScanMobile({ baseURL }) {
         <h1 style={{ color: '#7e7e7e', fontFamily: 'Segoe UI', marginTop: "20px", marginBottom: '20px', textAlign: "left" }}>Wifi</h1>
       </div>
       
-      <Button onClick={scanWifi} className={classes.button}>Scan</Button>
+      <Button onClick={scanWifi} className={classes.button}>{scan}</Button>
       <List component="nav" className={classes.list}>
         {data ? data.map((ssid, key) => (
           <ListItem onClick={() => Router.push({ pathname: '/connect', query: { ssid: ssid.name } })} button divider>

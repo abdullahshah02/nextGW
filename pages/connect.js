@@ -28,6 +28,9 @@ const useStyles = makeStyles((theme) => ({
     alignItems: "center",
     fontSize: "20px",
     fontFamily: "Segoe UI",
+    borderRadius: "0px",
+    borderTopLeftRadius: "10px",
+    borderTopRightRadius: "10px",
   },
   backButton: {
     // display: "none",
@@ -112,6 +115,7 @@ const Connect = ({ baseURL }) => {
         />
         <Button
           className={classes.button}
+          style={{borderRadius: "0px", borderBottomLeftRadius: "10px", borderBottomRightRadius: "10px"}}
           onClick={connectWifi}
         >
           {connect}

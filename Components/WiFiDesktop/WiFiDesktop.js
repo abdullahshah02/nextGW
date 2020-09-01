@@ -12,11 +12,13 @@ const useStyles = makeStyles((theme) => ({
   },
   button: {
     border: "1px solid #7e7e7e",
+    borderRadius: "0px",
+    borderTopLeftRadius: "10px",
+    borderTopRightRadius: "10px",
     color: "#7e7e7e",
     overflowY: "auto",
-    borderRadius: "0",
     backgroundColor: "transparent",
-    width: "100.3% !important",
+    width: "100% !important",
     display: "flex",
     flexDirection: "column",
     justifyContent: "center",
@@ -47,6 +49,8 @@ const useStyles = makeStyles((theme) => ({
   listBox: {
     border: "1px solid #7e7e7e",
     borderTop: "0",
+    borderBottomLeftRadius: "10px",
+    borderBottomRightRadius: "10px",
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
@@ -157,6 +161,7 @@ export default function WiFiDesktop({ baseURL }) {
           ? <div id="scan-button-container">
             <Button
               className={classes.button}
+              style={{borderRadius: "10px"}}
               onClick={scanWifi}
             >
               {scan}
