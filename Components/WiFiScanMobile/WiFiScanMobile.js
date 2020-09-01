@@ -55,11 +55,11 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-const INIT_STATE = [{ name: "SSID1" }, { name: "SSID2" }, { name: "SSID3" }];
+// const INIT_STATE = [{ name: "SSID1" }, { name: "SSID2" }, { name: "SSID3" }];
 
 export default function WiFiScanMobile({ baseURL }) {
   const classes = useStyles();
-  const [data, setData] = useState(INIT_STATE);
+  const [data, setData] = useState(null);
   const [scan, setScan] = useState('Tap to Scan');
 
   const scanWifi = async () => {
