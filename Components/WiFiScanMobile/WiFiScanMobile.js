@@ -22,7 +22,7 @@ const useStyles = makeStyles((theme) => ({
     color: "#7e7e7e",
     overflowY: "auto",
     backgroundColor: "transparent",
-    width: "100.1% !important",
+    width: "100% !important",
     display: "flex",
     flexDirection: "column",
     justifyContent: "center",
