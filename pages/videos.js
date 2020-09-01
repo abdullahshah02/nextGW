@@ -15,6 +15,26 @@ import axios from 'axios';
 import _ from 'underscore';
 import moment from 'moment';
 import Router from "next/router";
+import styled, { keyframes } from 'styled-components'
+
+const pulse = keyframes`
+  from {
+    opacity: 20%;
+  }
+
+  to {
+    opacity: 70%;
+  }
+`
+
+const PulseBar = styled.div`
+  height: 100%;
+  width: 100%;
+  background-color: #d1d1d1;
+  display: inline-block;
+  animation: ${pulse} 1.2s ease-in-out;
+  animation-iteration-count: infinite;
+`
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -150,15 +170,14 @@ const useStyles = makeStyles((theme) => ({
     position: "relative",
   },
   greyBar: {
-    height: "18px",
     width: "100px",
-    backgroundColor: "#d1d1d1",
-    display: "inline-block",
-    marginTop: "8px",
-    boxShadow: "2px 2px 1px #a0a0a0",
+    height: "20px",
     [theme.breakpoints.down("sm")]: {
-      width: "80%",
-      height: "22px"
+      width: "25%",
+      height: "28px"
+    },
+    [theme.breakpoints.down("xs")]: {
+      width: "200px"
     }
   },
   listItem: {
@@ -285,7 +304,9 @@ const Videos = ({ baseURL }) => {
                               }
                             </Menu>
                           </>
-                          : <div className={classes.greyBar}></div>
+                          : <ListItem className={classes.listItem}>
+                            <div className={classes.greyBar}><PulseBar /></div>
+                          </ListItem>
                       }
 
                     </ListItem>
@@ -297,10 +318,24 @@ const Videos = ({ baseURL }) => {
                           </ListItem>
                         ))
                         : <>
-                          <ListItem className={classes.listItem}><div className={classes.greyBar}></div></ListItem>
-                          <ListItem className={classes.listItem}><div className={classes.greyBar}></div></ListItem>
-                          <ListItem className={classes.listItem}><div className={classes.greyBar}></div></ListItem>
-                          <ListItem className={classes.listItem}><div className={classes.greyBar}></div></ListItem>
+                          <ListItem className={classes.listItem}>
+                            <div className={classes.greyBar}><PulseBar /></div>
+                          </ListItem>
+                          <ListItem className={classes.listItem}>
+                            <div className={classes.greyBar}><PulseBar /></div>
+                          </ListItem>
+                          <ListItem className={classes.listItem}>
+                            <div className={classes.greyBar}><PulseBar /></div>
+                          </ListItem>
+                          <ListItem className={classes.listItem}>
+                            <div className={classes.greyBar}><PulseBar /></div>
+                          </ListItem>
+                          <ListItem className={classes.listItem}>
+                            <div className={classes.greyBar}><PulseBar /></div>
+                          </ListItem>
+                          <ListItem className={classes.listItem}>
+                            <div className={classes.greyBar}><PulseBar /></div>
+                          </ListItem>
                         </>
                     }
                   </List>
@@ -383,7 +418,9 @@ const Videos = ({ baseURL }) => {
                           }
                         </Menu>
                       </>
-                      : <div className={classes.greyBar}></div>
+                      : <ListItem className={classes.listItem}>
+                        <div className={classes.greyBar}><PulseBar /></div>
+                      </ListItem>
                   }
                 </ListItem>
 
@@ -403,10 +440,18 @@ const Videos = ({ baseURL }) => {
                     </ListItem>
                   ))
                   : <>
-                    <ListItem className={classes.listItem}><div className={classes.greyBar}></div></ListItem>
-                    <ListItem className={classes.listItem}><div className={classes.greyBar}></div></ListItem>
-                    <ListItem className={classes.listItem}><div className={classes.greyBar}></div></ListItem>
-                    <ListItem className={classes.listItem}><div className={classes.greyBar}></div></ListItem>
+                    <ListItem className={classes.listItem}>
+                      <div className={classes.greyBar}><PulseBar /></div>
+                    </ListItem>
+                    <ListItem className={classes.listItem}>
+                      <div className={classes.greyBar}><PulseBar /></div>
+                    </ListItem>
+                    <ListItem className={classes.listItem}>
+                      <div className={classes.greyBar}><PulseBar /></div>
+                    </ListItem>
+                    <ListItem className={classes.listItem}>
+                      <div className={classes.greyBar}><PulseBar /></div>
+                    </ListItem>
                   </>
                 }
               </List>

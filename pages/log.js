@@ -10,6 +10,26 @@ import ListItemText from '@material-ui/core/ListItemText';
 import Button from '@material-ui/core/Button';
 import { Paper } from '@material-ui/core';
 import Router from "next/router";
+import styled, { keyframes } from 'styled-components'
+
+const pulse = keyframes`
+  from {
+    opacity: 20%;
+  }
+
+  to {
+    opacity: 70%;
+  }
+`
+
+const PulseBar = styled.div`
+  height: 100%;
+  width: 100%;
+  background-color: #d1d1d1;
+  display: inline-block;
+  animation: ${pulse} 1.2s ease-in-out;
+  animation-iteration-count: infinite;
+`
 
 const useStyles = makeStyles((theme) => ({
   grid: {
@@ -98,19 +118,15 @@ const useStyles = makeStyles((theme) => ({
     border: "1px solid #7e7e7e"
   },
   greyBar: {
-    height: "18px",
-    width: "100px",
-    backgroundColor: "#d1d1d1",
-    display: "inline-block",
-    marginTop: "8px",
-    boxShadow: "2px 2px 1px #a0a0a0",
+    width: "140px",
+    height: "28px",
     [theme.breakpoints.down("sm")]: {
       width: "25%",
       height: "28px"
     },
     [theme.breakpoints.down("xs")]: {
       width: "80%"
-     }
+    }
   },
   list: {
     width: "100%",
@@ -119,7 +135,7 @@ const useStyles = makeStyles((theme) => ({
     width: "100%",
     justifyContent: "space-between",
     [theme.breakpoints.down("xs")]: {
-     justifyContent: "center"
+      justifyContent: "center"
     }
   }
 }));
@@ -167,13 +183,31 @@ export default function Log({ baseURL }) {
                     </ListItem>
                   ))
                   : <>
-                    <ListItem className={classes.listItem}><div className={classes.greyBar}></div><div className={classes.greyBar}></div><div className={classes.greyBar}></div></ListItem>
-                    <ListItem className={classes.listItem}><div className={classes.greyBar}></div><div className={classes.greyBar}></div><div className={classes.greyBar}></div></ListItem>
-                    <ListItem className={classes.listItem}><div className={classes.greyBar}></div><div className={classes.greyBar}></div><div className={classes.greyBar}></div></ListItem>
-                    <ListItem className={classes.listItem}><div className={classes.greyBar}></div><div className={classes.greyBar}></div><div className={classes.greyBar}></div></ListItem>
-                    <ListItem className={classes.listItem}><div className={classes.greyBar}></div><div className={classes.greyBar}></div><div className={classes.greyBar}></div></ListItem>
-                    <ListItem className={classes.listItem}><div className={classes.greyBar}></div><div className={classes.greyBar}></div><div className={classes.greyBar}></div></ListItem>
-                    <ListItem className={classes.listItem}><div className={classes.greyBar}></div><div className={classes.greyBar}></div><div className={classes.greyBar}></div></ListItem>
+                    <ListItem className={classes.listItem}>
+                      <div className={classes.greyBar}><PulseBar /></div>
+                      <div className={classes.greyBar}><PulseBar /></div>
+                      <div className={classes.greyBar}><PulseBar /></div>
+                    </ListItem>
+                    <ListItem className={classes.listItem}>
+                      <div className={classes.greyBar}><PulseBar /></div>
+                      <div className={classes.greyBar}><PulseBar /></div>
+                      <div className={classes.greyBar}><PulseBar /></div>
+                    </ListItem>
+                    <ListItem className={classes.listItem}>
+                      <div className={classes.greyBar}><PulseBar /></div>
+                      <div className={classes.greyBar}><PulseBar /></div>
+                      <div className={classes.greyBar}><PulseBar /></div>
+                    </ListItem>
+                    <ListItem className={classes.listItem}>
+                      <div className={classes.greyBar}><PulseBar /></div>
+                      <div className={classes.greyBar}><PulseBar /></div>
+                      <div className={classes.greyBar}><PulseBar /></div>
+                    </ListItem>
+                    <ListItem className={classes.listItem}>
+                      <div className={classes.greyBar}><PulseBar /></div>
+                      <div className={classes.greyBar}><PulseBar /></div>
+                      <div className={classes.greyBar}><PulseBar /></div>
+                    </ListItem>
                   </>
               }
             </List>
@@ -193,11 +227,24 @@ export default function Log({ baseURL }) {
                     </ListItem>
                   ))
                   : <>
-                   <ListItem className={classes.listItem}><div className={classes.greyBar} /></ListItem>
-                   <ListItem className={classes.listItem}><div className={classes.greyBar} /></ListItem>
-                   <ListItem className={classes.listItem}><div className={classes.greyBar} /></ListItem>
-                   <ListItem className={classes.listItem}><div className={classes.greyBar} /></ListItem>
-                   <ListItem className={classes.listItem}><div className={classes.greyBar} /></ListItem>
+                   <ListItem className={classes.listItem}>
+                      <div className={classes.greyBar}><PulseBar /></div>
+                    </ListItem>
+                    <ListItem className={classes.listItem}>
+                      <div className={classes.greyBar}><PulseBar /></div>
+                    </ListItem>
+                    <ListItem className={classes.listItem}>
+                      <div className={classes.greyBar}><PulseBar /></div>
+                    </ListItem>
+                    <ListItem className={classes.listItem}>
+                      <div className={classes.greyBar}><PulseBar /></div>
+                    </ListItem>
+                    <ListItem className={classes.listItem}>
+                      <div className={classes.greyBar}><PulseBar /></div>
+                    </ListItem>
+                    <ListItem className={classes.listItem}>
+                      <div className={classes.greyBar}><PulseBar /></div>
+                    </ListItem>
                   </>
               }
             </List>
