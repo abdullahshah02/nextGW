@@ -4,17 +4,30 @@ import { makeStyles } from "@material-ui/core/styles";
 import Input from "@material-ui/core/Input";
 import Button from "@material-ui/core/Button";
 import getBaseURL from '../../utils/baseURL';
+import Paper from "@material-ui/core/Paper";
+import ListItem from '@material-ui/core/ListItem';
 
 const useStyles = makeStyles((theme) => ({
   root: {
     maxWidth: 360,
     backgroundColor: theme.palette.background.paper,
   },
+  paper: {
+    padding: "40px",
+    textAlign: "left",
+    width: "78%",
+    height: "555px",
+    overflowY: "auto",
+    fontFamily: "Segoe UI",
+    fontSize: "20px",
+    marginTop: '20px',
+    color: "#7e7e7e",
+    backgroundColor: "#fff",
+    display: "flex",
+    justifyContent: "center",
+  },
   button: {
-    border: "1px solid #7e7e7e",
-    borderRadius: "0px",
-    borderTopLeftRadius: "10px",
-    borderTopRightRadius: "10px",
+    borderRadius: "10px",
     color: "#7e7e7e",
     overflowY: "auto",
     backgroundColor: "transparent",
@@ -47,7 +60,6 @@ const useStyles = makeStyles((theme) => ({
     padding: "20px"
   },
   listBox: {
-    border: "1px solid #7e7e7e",
     borderTop: "0",
     borderBottomLeftRadius: "10px",
     borderBottomRightRadius: "10px",
@@ -70,7 +82,11 @@ const useStyles = makeStyles((theme) => ({
   grey: {
     color: "#7e7e7e",
     margin: "0"
-  }
+  },
+  someItem: {
+    width: "100%",
+    justifyContent: "center"
+  },
 }));
 
 // const INIT_STATE = [{ name: "SSID1" }, { name: "SSID2" }, { name: "SSID3" }];
@@ -156,78 +172,65 @@ export default function WiFiDesktop({ baseURL }) {
   return (
     <div className={classes.box}>
 
-      {
-        !data
-          ? <div id="scan-button-container">
-            <Button
-              className={classes.button}
-              style={{borderRadius: "10px"}}
-              onClick={scanWifi}
-            >
-              {scan}
-            </Button>
-          </div>
-          : <>
-            <div id="connect-button-container">
-              <Button
+      <Paper>
+        <ListItem divider className={classes.someItem}>
+          {
+            !data
+              ? <Button
+                className={classes.button}
+                style={{ borderRadius: "10px" }}
+                onClick={scanWifi}
+              >
+                {scan}
+              </Button>
+              : <Button
                 onClick={connectWifi}
                 className={classes.button}
               >
                 {connect}
               </Button>
-            </div>
-
-            {/* <div id="back-button-container">
-              <Button
-                onClick={backToScan}
-                className={classes.button}
-              >
-                BACK
-              </Button>
-            </div> */}
-          </>
-      }
-
-
-
-
-      {data ?
-        <div className={classes.listBox}>
-          {
-            connect != 'Connecting...'
-              ? data ? data.map((ssid, key) => (
-                <div
-                  className={classes.listItem}
-                  key={key}
-                >
-                  <div id={`${ssid.name}-label`} className={classes.Label}>
-                    {ssid.name}
-                  </div>
-                  <div style={{ position: 'absolute', top: '-4px', left: '35%', padding: "20px" }}>
-                    <Input
-                      id={`${ssid.name}-pwd`}
-                      className={classes.INPUT}
-                      disableUnderline={true}
-                      placeholder="Enter Password"
-                      onChange={handleChange}
-                    />
-                  </div>
-                </div>
-              ))
-                : null
-              : <div className={classes.text}>
-                <p className={classes.grey}>Attempting to Connect.</p>
-                <p className={classes.grey}>This can take about 20 seconds</p>
-                <p className={classes.grey} style={{marginTop: "20px"}}><b>If the connection succeeds you'll receive</b></p>
-                <p className={classes.grey}><b>an email with the link to this app</b></p>
-                <p className={classes.grey} style={{marginTop: "20px"}}>If the device fails to connect, the hotspot will remain active</p>
-                <p className={classes.grey}>and you can attempt to connect again through this page</p>
-              </div>
           }
-        </div>
-        : null
-      }
+        </ListItem>
 
+
+
+        {data ?
+          <div className={classes.listBox}>
+            {
+              connect != 'Connecting...'
+                ? data ? data.map((ssid, key) => (
+                  <div
+                    className={classes.listItem}
+                    key={key}
+                  >
+                    <div id={`${ssid.name}-label`} className={classes.Label}>
+                      {ssid.name}
+                    </div>
+                    <div style={{ position: 'absolute', top: '-4px', left: '35%', padding: "20px" }}>
+                      <Input
+                        id={`${ssid.name}-pwd`}
+                        className={classes.INPUT}
+                        disableUnderline={true}
+                        placeholder="Enter Password"
+                        onChange={handleChange}
+                      />
+                    </div>
+                  </div>
+                ))
+                  : null
+                : <div className={classes.text}>
+                  <p className={classes.grey}>Attempting to Connect.</p>
+                  <p className={classes.grey}>This can take about 20 seconds</p>
+                  <p className={classes.grey} style={{ marginTop: "20px" }}><b>If the connection succeeds you'll receive</b></p>
+                  <p className={classes.grey}><b>an email with the link to this app</b></p>
+                  <p className={classes.grey} style={{ marginTop: "20px" }}>If the device fails to connect, the hotspot will remain active</p>
+                  <p className={classes.grey}>and you can attempt to connect again through this page</p>
+                </div>
+            }
+          </div>
+          : null
+        }
+      </Paper>
     </div>
   );
 }
