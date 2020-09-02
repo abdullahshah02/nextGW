@@ -89,7 +89,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-// const INIT_STATE = [{ name: "SSID1" }, { name: "SSID2" }, { name: "SSID3" }];
+const INIT_STATE = [{ name: "SSID1" }, { name: "SSID2" }, { name: "SSID3" }];
 
 export default function WiFiDesktop({ baseURL }) {
   const [data, setData] = useState(null);
@@ -134,10 +134,6 @@ export default function WiFiDesktop({ baseURL }) {
     }
   };
 
-  const backToScan = () => {
-    setData([]);
-  }
-
   const connectWifi = async () => {
     try {
       setConnect('Connecting...');
@@ -177,20 +173,22 @@ export default function WiFiDesktop({ baseURL }) {
           className={classes.someItem}
           style={{ padding: "0" }}
         >
+          <Button
+            className={classes.button}
+            onClick={scanWifi}
+          >
+            {scan}
+          </Button>
           {
-            !data
+            data
               ? <Button
-                className={classes.button}
-                onClick={scanWifi}
-              >
-                {scan}
-              </Button>
-              : <Button
                 onClick={connectWifi}
                 className={classes.button}
+                style={{borderLeft: "1px solid #c8c8c8"}}
               >
                 {connect}
               </Button>
+              : null
           }
         </ListItem>
 

@@ -110,12 +110,12 @@ const useStyles = makeStyles((theme) => ({
     marginTop: "17px",
     [theme.breakpoints.down("sm")]: {
       marginTop: "80px",
-      padding: "10px 0px 0px 0px",
+      padding: "10px",
       height: "300px"
     },
     [theme.breakpoints.down("xs")]: {
       marginTop: "80px",
-      padding: "10px 0px 0px 0px",
+      padding: "10px",
       height: "250px"
     },
   },
@@ -148,7 +148,7 @@ const useStyles = makeStyles((theme) => ({
     paddingTop: "100px",
     left: "0",
     top: "0",
-    width: "90%",
+    width: "100%",
     height: "100%",
     overflow: "auto",
     backgroundColor: "rgba(0, 0, 0, 0.2)"
