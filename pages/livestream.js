@@ -125,6 +125,7 @@ export default function Livestream({ baseURL }) {
   const [loading, setLoading] = React.useState(true);
 
   React.useEffect(() => {
+    setTimeout(() => setLoading(false), 2500)
     const interval = setInterval(() => setTime(Date.now()), 500);
     return () => { clearInterval(interval); }
   }, []);
