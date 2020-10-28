@@ -16,7 +16,7 @@ const useStyles = makeStyles((theme) => ({
     padding: theme.spacing(2),
     textAlign: "center",
     width: "70%",
-    fontFamily: "Segoe UI",
+    fontFamily: "Roboto",
     fontSize: "20px",
     color: "#7e7e7e",
     backgroundColor: "#dae3f0",
@@ -54,7 +54,7 @@ const useStyles = makeStyles((theme) => ({
     display: "none",
     color: "#7e7e7e",
     fontWeight: "bold",
-    fontFamily: "Segoe UI",
+    fontFamily: "Roboto",
     marginLeft: "9%",
     [theme.breakpoints.down("xs")]: {
       display: "block",
@@ -97,7 +97,7 @@ const useStyles = makeStyles((theme) => ({
   heading: {
     color: '#7e7e7e',
     fontWeight: 'bold',
-    fontFamily: 'Segoe UI',
+    fontFamily: 'Roboto',
     margin: '0',
     width: '100%',
     textAlign: 'left',
@@ -139,7 +139,7 @@ export default function Livestream({ baseURL }) {
         <Grid className={classes.main} item xs={12} sm={9} md={10}>
           <div style={{ display: 'flex', alignItems: "center", width: "95%" }}>
             <img className={classes.backButton} src="/back.png" style={{ width: "30px", height: "30px", marginRight: "20px", cursor: "pointer" }} onClick={() => Router.push('/')} />
-            <h1 style={{ color: '#7e7e7e', fontFamily: 'Segoe UI', marginTop: "20px", marginBottom: '20px', textAlign: "left" }}>Live</h1>
+            <h1 style={{ color: '#7e7e7e', fontFamily: 'Roboto', marginTop: "20px", marginBottom: '20px', textAlign: "left" }}>Live</h1>
           </div>
           <div className={classes.video}>
             {

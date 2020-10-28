@@ -44,7 +44,7 @@ const useStyles = makeStyles((theme) => ({
     width: "78%",
     height: "555px",
     overflowY: "auto",
-    fontFamily: "Segoe UI",
+    fontFamily: "Roboto",
     fontSize: "20px",
     marginTop: '20px',
     color: "#7e7e7e",
@@ -68,7 +68,7 @@ const useStyles = makeStyles((theme) => ({
       width: "100%",
       height: "555px",
       overflowY: "auto",
-      fontFamily: "Segoe UI",
+      fontFamily: "Roboto",
       fontSize: "20px",
       marginTop: '20px',
       color: "#7e7e7e",
@@ -92,7 +92,7 @@ const useStyles = makeStyles((theme) => ({
     display: "none",
     color: "#7e7e7e",
     fontWeight: "bold",
-    fontFamily: "Segoe UI",
+    fontFamily: "Roboto",
     marginLeft: "9%",
     [theme.breakpoints.down("xs")]: {
       display: "block",
@@ -115,7 +115,7 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: "#f00202",
     display: "inline-block",
     marginTop: "8px",
-    border: "1px solid #7e7e7e"
+    border: "0"
   },
   greyBar: {
     width: "140px",
@@ -169,7 +169,7 @@ export default function Log({ baseURL }) {
         <Grid className={classes.main} item xs={12} sm={9} md={10}>
           <div style={{ display: 'flex', alignItems: "center", width: "95%" }}>
             <img className={classes.backButton} src="/back.png" style={{ width: "30px", height: "30px", marginRight: "20px", cursor: "pointer" }} onClick={() => Router.push('/')} />
-            <h1 style={{ color: '#7e7e7e', fontFamily: 'Segoe UI', marginTop: "20px", marginBottom: '20px', textAlign: "left" }}>Log</h1>
+            <h1 style={{ color: '#7e7e7e', fontFamily: 'Roboto', marginTop: "20px", marginBottom: '20px', textAlign: "left" }}>Log</h1>
           </div>
           <Paper className={classes.paper}>
             <List className={classes.list}>

@@ -18,7 +18,7 @@ const useStyles = makeStyles((theme) => ({
     width: "78%",
     height: "555px",
     overflowY: "auto",
-    fontFamily: "Segoe UI",
+    fontFamily: "Roboto",
     fontSize: "20px",
     marginTop: '20px',
     color: "#7e7e7e",
@@ -37,7 +37,7 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: "center",
     alignItems: "center",
     fontSize: "20px",
-    fontFamily: "Segoe UI",
+    fontFamily: "Roboto",
     [theme.breakpoints.down("sm")]: {
       width: "20rem",
     },
@@ -46,7 +46,7 @@ const useStyles = makeStyles((theme) => ({
     marginLeft: "3rem",
   },
   Label: {
-    fontFamily: "Segoe UI Semibold",
+    fontFamily: "Roboto",
     marginLeft: "2rem",
     [theme.breakpoints.down("sm")]: {
       marginLeft: "0",
@@ -71,7 +71,7 @@ const useStyles = makeStyles((theme) => ({
   },
   text: {
     marginTop: "60px",
-    fontFamily: "Segoe UI",
+    fontFamily: "Roboto",
     fontSize: "18px",
     display: "flex",
     alignItems: "center",
@@ -89,10 +89,10 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const INIT_STATE = [{ name: "SSID1" }, { name: "SSID2" }, { name: "SSID3" }];
+//const INIT_STATE = [{ name: "SSID1" }, { name: "SSID2" }, { name: "SSID3" }];
 
 export default function WiFiDesktop({ baseURL }) {
-  const [data, setData] = useState(null);
+  const [data, setData] = useState();
   const [connect, setConnect] = React.useState('Connect');
   const [scan, setScan] = React.useState('Tap to Scan');
 

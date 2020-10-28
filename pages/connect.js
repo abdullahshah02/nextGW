@@ -27,7 +27,7 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: "center",
     alignItems: "center",
     fontSize: "20px",
-    fontFamily: "Segoe UI",
+    fontFamily: "Roboto",
   },
   backButton: {
     // display: "none",
@@ -41,7 +41,7 @@ const useStyles = makeStyles((theme) => ({
     width: "78%",
     height: "555px",
     overflowY: "auto",
-    fontFamily: "Segoe UI",
+    fontFamily: "Roboto",
     fontSize: "20px",
     marginTop: '20px',
     color: "#7e7e7e",
@@ -66,7 +66,7 @@ const useStyles = makeStyles((theme) => ({
     paddingBottom: "60px",
     paddingLeft: "20px",
     paddingRight: "20px",
-    fontFamily: "Segoe UI",
+    fontFamily: "Roboto",
     fontSize: "18px",
     display: "flex",
     alignItems: "center",
@@ -110,7 +110,7 @@ const Connect = ({ baseURL }) => {
       ? <Container className={classes.main}>
         <div style={{ display: 'flex', alignItems: "center", width: "95%" }}>
           <img className={classes.backButton} src="/back.png" style={{ width: "30px", height: "30px", marginRight: "20px", cursor: "pointer" }} onClick={() => router.push('/wifi')} />
-          <h1 style={{ color: '#7e7e7e', fontFamily: 'Segoe UI', marginTop: "20px", marginBottom: '20px', textAlign: "left" }}>Wifi</h1>
+          <h1 style={{ color: '#7e7e7e', fontFamily: 'Roboto', marginTop: "20px", marginBottom: '20px', textAlign: "left" }}>Wifi</h1>
         </div>
         <Paper>
           <ListItem divider>

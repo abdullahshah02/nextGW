@@ -59,7 +59,7 @@ const useStyles = makeStyles((theme) => ({
     width: "100%",
     height: "570px",
     marginTop: "-35px",
-    fontFamily: "Segoe UI",
+    fontFamily: "Roboto",
     fontSize: "20px",
     color: "#7e7e7e",
     backgroundColor: "#fff",
@@ -91,7 +91,7 @@ const useStyles = makeStyles((theme) => ({
     display: "none",
     color: "#7e7e7e",
     fontWeight: "bold",
-    fontFamily: "Segoe UI",
+    fontFamily: "Roboto",
     marginLeft: "9%",
     [theme.breakpoints.down("xs")]: {
       display: "block",
@@ -278,7 +278,7 @@ const Videos = ({ baseURL }) => {
               <Navbar />
             </Grid>
             <Grid className={classes.main} item xs={12} sm={3} md={2}>
-              <h1 style={{ color: '#7e7e7e', fontWeight: 'bold', fontFamily: 'Segoe UI', marginBottom: "0px" }}>Videos</h1>
+              <h1 style={{ color: '#7e7e7e', fontWeight: 'bold', fontFamily: 'Roboto', marginBottom: "0px" }}>Videos</h1>
               <div className={classes.column}>
                 <Paper className={classes.paper}>
                   <List component="nav" className={classes.root}>
@@ -391,7 +391,7 @@ const Videos = ({ baseURL }) => {
         <Grid className={classes.main} item xs={12} sm={12}>
           <div style={{ display: 'flex', alignItems: "center" }}>
             <img src="/back.png" style={{ width: "30px", height: "30px", marginRight: "20px", cursor: "pointer" }} onClick={() => Router.push('/')} />
-            <h1 style={{ color: '#7e7e7e', fontFamily: 'Segoe UI', marginTop: "20px", marginBottom: '20px' }}>Videos</h1>
+            <h1 style={{ color: '#7e7e7e', fontFamily: 'Roboto', marginTop: "20px", marginBottom: '20px' }}>Videos</h1>
           </div>
           <div className={classes.column}>
             <Paper className={classes.paper}>

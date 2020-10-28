@@ -17,7 +17,7 @@ const useStyles = makeStyles((theme) => ({
     padding: theme.spacing(2),
     textAlign: "center",
     width: "70%",
-    fontFamily: "Segoe UI ",
+    fontFamily: "Roboto ",
     fontSize: "20px",
     color: "#7e7e7e",
     backgroundColor: "#dae3f0",
@@ -51,7 +51,7 @@ const useStyles = makeStyles((theme) => ({
     padding: theme.spacing(2),
     textAlign: "center",
     width: "70%",
-    fontFamily: "Segoe UI ",
+    fontFamily: "Roboto ",
     fontSize: "20px",
     color: "#7e7e7e",
     backgroundColor: "#dae3f0",
@@ -71,7 +71,7 @@ const useStyles = makeStyles((theme) => ({
     display: "none",
     color: "#7e7e7e",
     fontWeight: "bold",
-    fontFamily: "Segoe UI",
+    fontFamily: "Roboto",
     marginLeft: "9%",
     [theme.breakpoints.down("xs")]: {
       display: "block",
@@ -109,7 +109,7 @@ export default function FullWidthGrid({ baseURL }) {
                 marginBottom: "60px",
                 color: "#7e7e7e",
                 fontWeight: "bold",
-                fontFamily: "Segoe UI ",
+                fontFamily: "Roboto ",
               }}
             >
               WiFi
