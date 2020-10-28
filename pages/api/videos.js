@@ -5,7 +5,7 @@ import moment from 'moment';
 export default async (req, res) => {
 	try {
 		const { baseURL } = req.query;
-		const tunnel_path = `http://197bf69c73c4.ngrok.io/home/pi/pikrellcam/media/videos`;
+		const tunnel_path = `https://ba44ba82b37ff934df364748599c405d.balena-devices.com/home/pi/pikrellcam/media/videos/`;
 		const response = await axios.get(tunnel_path);
 		const videos = response.data.files.map(video => {
 			const info = video.title.split('_');
@@ -33,7 +33,7 @@ export default async (req, res) => {
 		const sorted_dates = date_list.sort(function (a, b) {
 			a = a.split('-').reverse().join('');
 			b = b.split('-').reverse().join('');
-			return a.localeCompare(b);
+			return b.localeCompare(a);
 		});
 		console.log(sorted_dates);
 		res.status(200).json({ videos: grouped, date_list: sorted_dates });
